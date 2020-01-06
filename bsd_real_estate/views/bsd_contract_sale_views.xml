@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_contract_sale_form">
+        <field name="name">bsd.contract.sale.form</field>
+        <field name="model">bsd.contract.sale</field>
+        <field name="arch" type="xml">
+            <form>
+				<!--<header>-->
+					<!--<field name="state" widget="statusbar" statusbar_visible="draft,waiting,open,close" statusbar_colors="{&quot;draft&quot;:&quot;red&quot;, &quot;open&quot;:&quot;blue&quot;, &quot;close&quot;:&quot;red&quot;}" select="1"/>-->
+				<!--</header>-->
+                <sheet>
+					<div class="oe_title oe_left">
+						<label for="name" class="oe_edit_only"/>
+						<h1>
+							<field name="name" default_focus="1" placeholder="Contract Name" class="oe_inline"/>
+						</h1>
+					</div>
+					<group colspan="2" >
+						<group colspan="4" col="4">
+							<separator string="Thông tin đối tượng" colspan="4"/>
+                            <field name="bsd_landlord_id"/>
+                            <field name="bsd_person_buy_id"/>
+                            <field name="bsd_person_landlord_id"/>
+                            <field name="bsd_multi_unit"/>
+                            <field name="bsd_contract_type"/>
+                            <field name="bsd_block_id" attrs="{'invisible':[('bsd_multi_unit','=',False)]}"/>
+						</group>
+						<group colspan="4" col="4">
+							<separator string="Thông tin hợp đồng" colspan="4"/>
+                            <field name="bsd_unit_id" placeholder="Unit Name"
+                                   attrs="{'readonly':[('bsd_multi_unit','=',True)], 'required':[('bsd_multi_unit','=', False)]}"
+                                   context="{'form_view_ref' : 'bsd_real_estate.bsd_account_asset_form', 'tree_view_ref' : 'bsd_real_estate.bsd_account_asset_tree'}"
+                            />
+                            <field name="bsd_unit_price" attrs="{'invisible':[('bsd_multi_unit','=',True)]}"/>
+							<field name="currency_id"/>
+							<field name="bsd_vat" attrs="{'invisible':[('bsd_multi_unit','=',True)]}"/>
+                            <field name="bsd_payment_type"/>
+                            <field name="bsd_maintenance_cost" attrs="{'invisible':[('bsd_multi_unit','=',True)]}"/>
+                            <field name="bsd_payment_term_id"/>
+                            <field name="bsd_total_price"/>
+                            <field name="bsd_start_date"/>
+                            <p colspan="2" class="oe_grey">(Giá bán này đã bao gồm giá trị quyền sử dụng đất
+                                thuế giá trị gia tăng, kinh phí bảo trì phần sở hữu chung 2%)</p>
+                            <field name="bsd_due_date"/>
+                            <field name="bsd_management_fee"/>
+                            <field name="bsd_pay_rec_id"/>
+                            <p colspan="2" class="oe_grey">(
+                                Mức phí quản lý tòa nhà cư dân phải thanh toán định kì)
+                            </p>
+                            <field name="bsd_contract_attachment"/>
+                            <field name="company_id" invisible="1"/>
+
+						</group>
+						<group colspan="4" col="4">
+							<separator string="Bảo hành" colspan="4"/>
+                            <field name="bsd_warranty_int"/>
+                            <field name="bsd_warranty_from_date"/>
+                            <field name="bsd_warranty_int" invisible="1"/>
+                            <field name="bsd_warranty_to_date"/>
+						</group>
+						<group colspan="4" col="4">
+							<separator string="Hoa hồng" colspan="4"/>
+                            <field name="bsd_have_commission"/>
+                            <field name="bsd_employee_id" attrs="{'invisible':[('bsd_have_commission', '!=',True)]}"/>
+                            <field name="bsd_commission_type" attrs="{'invisible':[('bsd_have_commission', '!=',True)]}"/>
+                            <field name="bsd_commission_percent" attrs="{'invisible':[('bsd_have_commission', '!=',True)]}"/>
+                            <field name="bsd_commission_total" attrs="{'invisible':[('bsd_have_commission', '!=',True)]}"/>
+						</group>
+					</group>
+                    <notebook>
+                        <page name="units" string="Units" attrs="{'invisible':[('bsd_multi_unit','=',False)]}">
+                            <field name="bsd_unit_ids"
+                                   context="{'default_bsd_block_id': bsd_block_id}">
+                                <tree editable="bottom">
+                                    <field name="bsd_block_id" invisible="1"/>
+                                    <field name="name" string="Unit"
+                                           context="{'form_view_ref' : 'bsd_real_estate.bsd_account_asset_form'}"
+                                           options="{'no_create': True}"/>
+                                    <field name="bsd_unit_price" sum="Total"/>
+                                    <field name="bsd_maintenance_cost" sum="Maintenance"/>
+                                    <field name="bsd_vat" sum="VAT"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <!--<field name="activity_ids" widget="mail_activity"/>-->
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_contract_sale_tree">
+        <field name="name">bsd.contract.sale.tree</field>
+        <field name="model">bsd.contract.sale</field>
+        <field name="arch" type="xml">
+            <tree string="Details">
+                <field name="name"/>
+                <field name="bsd_landlord_id"/>
+                <field name="bsd_person_buy_id"/>
+                <field name="bsd_total_price"/>
+			</tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_contract_sale_action">
+        <field name="name">Contract Sale</field>
+        <field name="res_model">bsd.contract.sale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="xml">
+            <p> Tạo contract mới</p>
+        </field>
+    </record>
+</odoo>
+
+

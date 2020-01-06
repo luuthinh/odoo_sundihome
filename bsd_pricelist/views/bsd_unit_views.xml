@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_account_asset_form">
+        <field name="name">bsd.account.asset.form.inherit</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="bsd_real_estate.bsd_account_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bsd_owner_id']" position="after">
+                <field name="bsd_contract_sale_id" attrs="{'invisible':[('bsd_property_for', 'not in', ['lease','sale'])]}"/>
+            </xpath>
+            <xpath expr="//field[@name='bsd_tenant_id']" position="after">
+                <field name="bsd_contract_rent_id" attrs="{'invisible':[('bsd_property_for', 'not in', ['lease','rent'])]}"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Dịch vụ">
+                    <field name="bsd_service_ids">
+                        <tree>
+                            <field name="bsd_residential_id"/>
+                            <field name="bsd_product_id"/>
+                            <field name="name"/>
+                            <field name="bsd_note"/>
+                            <field name="bsd_registry_service_id"/>
+                            <field name="bsd_cancel_registry_service_id"/>
+                            <field name="bsd_start_date"/>
+                            <field name="bsd_end_date"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                    <footer>
+                        <button string="Create Invoice" name="create_invoice" type="object" class="oe_highlight"/>
+                    </footer>
+                </page>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Hóa đơn">
+                    <field name="bsd_invoice_ids" readonly="1">
+                        <tree decoration-info="state == 'draft'" string="Invoices" decoration-muted="state == 'cancel'" js_class="account_tree">
+                            <field name="bsd_unit_id" invisible="1"/>
+                            <field name="name"/>
+                            <field name="partner_id" invisible="1"/>
+                            <field name="invoice_date" optional="show" invisible="context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt')" string="Invoice Date"/>
+                            <field name="invoice_origin" optional="show" string="Source Document"/>
+                            <field name="invoice_payment_ref" optional="hide" invisible="context.get('default_type') in ('out_invoice', 'out_refund','out_receipt')"/>
+                            <!--<field name="invoice_user_id" optional="show" invisible="context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt')" string="Sales Person"/>-->
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" optional="show"/>
+                            <field name="invoice_date_due" optional="show"/>
+                            <field name="amount_untaxed_signed" string="Tax Excluded" sum="Total" optional="show"/>
+                            <field name="amount_tax_signed" string="Tax" sum="Total" optional="hide"/>
+                            <field name="amount_total_signed" string="Total" sum="Total" optional="show"/>
+                            <field name="amount_residual_signed" string="Amount Due" sum="Amount Due" optional="show"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="company_currency_id" invisible="1"/>
+                            <field name="state" optional="show"/>
+                            <field name="invoice_payment_state" optional="hide"/>
+                            <field name="type" invisible="context.get('default_type', True)"/>
+                        </tree>
+                    </field>
+                    <!--<footer>-->
+                        <!--<button string="Create Invoice" name="create_invoice" type="object" class="oe_highlight"/>-->
+                    <!--</footer>-->
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

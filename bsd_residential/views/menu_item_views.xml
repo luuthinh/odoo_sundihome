@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem id="bsd_master_data_menu"
+              name="Master Data"
+              sequence="15"
+              parent="bsd_real_estate.bsd_main_project_management_root"/>
+    <menuitem id="bsd_residential"
+              name="Cư Dân"
+              parent="bsd_master_data_menu"
+              action="bsd_res_partner_action"/>
+    <menuitem id="bsd_vehicle"
+              name="Xe"
+              parent="bsd_master_data_menu"
+              action="bsd_residential_vehicle_action"/>
+    <menuitem id="bsd_request_menu"
+              name="Request"
+              sequence="20"
+              parent="bsd_real_estate.bsd_main_project_management_root"/>
+    <menuitem id="bsd_registry_request_menu"
+              name="Registry Request"
+              parent="bsd_request_menu"
+              action="bsd_registry_request_action"/>
+    <menuitem id="bsd_registry_service_menu"
+              name="Registry Service"
+              parent="bsd_request_menu"
+              action="bsd_registry_service_action"/>
+    <menuitem id="bsd_registry_service_type_menu"
+              name="Service Type"
+              parent="bsd_real_estate.bsd_type_menu"
+              action="bsd_registry_service_type_action"/>
+</odoo>

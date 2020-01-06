@@ -1,0 +1,36 @@
+# -*- coding:utf-8 -*-
+{
+    'name': 'BSD Real Estate V0.1',
+    'version': '0.1',
+    'category': 'App',
+    'author': 'Thịnh Lưu',
+    'depends': [
+                'base',
+                'mail',
+                'portal',
+                'hr',
+                'stock',
+                'account',
+                'analytic',
+                'account_accountant',
+                'account_asset',
+                'l10n_vn'
+    ],
+    'data': [
+        'security/user_groups.xml',
+        'security/ir.model.access.csv',
+        'data/account_analytic_data.xml',
+        'views/bsd_real_estate_project_views.xml',
+        'views/bsd_real_estate_block_views.xml',
+        'views/bsd_real_estate_floor_views.xml',
+        'views/account_asset_views.xml',
+        'views/bsd_property_views.xml',
+        'views/bsd_contract_tenancy_views.xml',
+        'views/bsd_contract_sale_views.xml',
+        'views/account_payment_views.xml',
+        'views/stock_production_lot_views.xml',
+        'wizards/bsd_tenancy_renew_views.xml',
+        'views/menu_item_views.xml',
+    ],
+    'application': True,
+}

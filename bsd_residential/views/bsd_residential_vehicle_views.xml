@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_residential_vehicle_tree">
+        <field name="name">bsd.residential.vehicle.tree</field>
+        <field name="model">bsd.residential.vehicle</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="bsd_type"/>
+                <field name="bsd_brand"/>
+                <field name="bsd_license"/>
+                <field name="bsd_partner_id"/>
+                <field name="bsd_unit_id"/>
+                <field name="state"/>
+                <field name="bsd_date_accuracy"/>
+                <field name="bsd_note"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_residential_vehicle_form">
+        <field name="name">bsd.residential.vehicle.form</field>
+        <field name="model">bsd.residential.vehicle</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Confirm"
+                            type="object"
+                            states="waiting"
+                            name="action_confirm"
+                            class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="waiting,active"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon"
+                                text="Archived"
+                                bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"
+                                modifiers="{'invisible':[['active','=',true]]}"/>
+                    <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="bsd_type"/>
+                            <field name="bsd_brand"/>
+                            <field name="bsd_license"/>
+                        </group>
+                        <group>
+                            <field name="bsd_partner_id"/>
+                            <field name="bsd_unit_id"/>
+                            <field name="bsd_date_accuracy"/>
+                            <field name="bsd_note"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_residential_vehicle_action">
+        <field name="name">Xe</field>
+        <field name="res_model">bsd.residential.vehicle</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="xml">
+            <p>Tạo mới Xe</p>
+        </field>
+    </record>
+</odoo>

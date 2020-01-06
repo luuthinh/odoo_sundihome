@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="my_residential_link" name="Link request" inherit_id="portal.frontend_layout">
+        <xpath expr="//a[@id='o_logout']" position="before">
+            <a href="/registry" role="menuitem" t-if="user_id.partner_id.bsd_is_master" class="dropdown-item">Đăng ký nhân khẩu</a>
+            <a href="/service" role="menuitem" class="dropdown-item">Đăng ký dịch vụ</a>
+        </xpath>
+
+    </template>
+
+    <template id="bsd_portal_breadcrumbs" name="Link registry" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//li[@class='breadcrumb-item']" position="after">
+            <li t-if="page_name == 'my_registry'" class="breadcrumb-item">Đăng ký nhâu khẩu</li>
+            <li t-if="page_name == 'my_service'" class="breadcrumb-item">Đăng ký dịch vụ</li>
+        </xpath>
+    </template>
+
+    <template id="registry">
+        <t t-call="portal.portal_layout">
+            <t t-set="additional_title">Đăng ký nhân khẩu</t>
+            <form action="/registry" method="post" id="reg-form">
+                <!--<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
+                <div class="row o_residential_registry form-group">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div t-if="error_message" class="alert alert-danger" role="alert">
+                                    <t t-foreach="error_message" t-as="err">
+                                        <t t-esc="err"/>
+                                    </t>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="col-form-label" for="bsd_partner_id">Chủ hộ</label>
+                                <p><t t-esc="bsd_partner_id"/></p>
+                                <label class="col-form-label" for="unit">Unit</label>
+                                <select class="form-control" id="selectUnit" name="bsd_unit_id">
+                                    <t t-foreach="bsd_unit_id" t-as="unit">
+                                        <option t-att-value="unit.id"><t t-esc="unit.name"/></option>
+                                    </t>
+                                </select>
+                                <label for="selectMethod">Phương thức</label>
+                                <select class="form-control" id="selectMethod" name="bsd_method">
+                                    <t t-foreach="bsd_method" t-as="method">
+                                        <option t-att-value="method[0]"><t t-esc="method[1]"/></option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-responsive" id="add-res">
+                            <!--<t t-set="temp" t-value="bsd_relationship_id"/>-->
+                            <table class="table table-hover">
+                                <thead>
+                                    <th>Name</th>
+                                    <th>Birthday</th>
+                                    <th>CMND</th>
+                                    <th>TaxID</th>
+                                    <th>Job</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Quan hệ</th>
+                                </thead>
+                                <tbody id="registry-line">
+                                </tbody>
+                            </table>
+                            <button type="button" id="add-create-line" class="btn btn-primary mp32">Add line</button>
+                            <button type="button" id="remove-create-line" class="btn btn-primary mp32">Remove line</button>
+                        </div>
+                        <div class="table-responsive" id="sub-res">
+                            <table class="table table-hover">
+                                <thead>
+                                    <th>Cư dân</th>
+                                    <th>Quan hệ chủ hộ</th>
+                                </thead>
+                                <tbody id="residential-line">
+                                </tbody>
+                            </table>
+                            <button type="button" id="add-res-line" class="btn btn-primary mp32">Add line</button>
+                        </div>
+                        <div class="clearfix">
+                            <button type="button" id="post-btn" class="btn btn-primary float-right mb32">
+                                    Send request
+                            </button>
+                            <!--<button type="submit" class="btn btn-primary float-right mb32"> Gửi</button>-->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </t>
+    </template>
+
+    <template id="registry_success">
+        <t t-call="portal.portal_layout">
+            <t t-set="additional_title">Success</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <div class="row h-100 justify-content-center align-items-center">
+                        <h3>Đăng ký thành công</h3>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="service">
+        <t t-call="portal.portal_layout">
+            <t t-set="additional_title">Đăng ký dịch vụ</t>
+            <div id="ser-form">
+                <!--<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
+                <div class="row o_residential_service form-group">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div t-if="error_message" class="alert alert-danger" role="alert">
+                                    <t t-foreach="error_message" t-as="err">
+                                        <t t-esc="err"/>
+                                    </t>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <label for="bsd_partner_id">Cư dân</label>
+                                    <p><t t-esc="bsd_partner_id.name"/></p>
+                                </div>
+                                <div>
+                                    <label for="selectService">Service</label>
+                                    <select id="selectService" name="bsd_type_id">
+                                        <t t-foreach="bsd_type_id" t-as="service">
+                                            <option t-att-value="service.id"
+                                                    t-att-product-tmpl="service.bsd_product_tmpl_id.id"
+                                                    t-att-is-master="service.bsd_service_master"><t t-esc="service.name"/></option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div id="div-unit">
+                                    <label for="selectUnit">Căn hộ</label>
+                                    <select id="selectUnit" name="bsd_unit_id">
+                                        <t t-foreach="bsd_unit_id" t-as="unit">
+                                            <option t-att-value="unit.id"><t t-esc="unit.name"/></option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div id="attribute"></div>
+                                <div class="table-responsive" id="parking-service">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <th>Loại Xe</th>
+                                            <th>Hiệu xe</th>
+                                            <th>Biển kiểm soát</th>
+                                            <th>Ghi chú</th>
+                                            <th>Cư dân</th>
+                                        </thead>
+                                        <tbody id="vehicle-line">
+                                        </tbody>
+                                    </table>
+                                    <button type="button" id="add-vehicle-line" class="btn btn-primary mp32">Add line</button>
+                                    <button type="button" id="remove-vehicle-line" class="btn btn-primary mp32">Remove line</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <button type="button" id="post-btn" class="btn btn-primary float-right mb32">
+                                    Send request
+                            </button>
+                            <!--<button type="submit" class="btn btn-primary float-right mb32"> Gửi</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

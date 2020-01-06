@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_account_payment_inherit_form">
+        <field name="name">bsd.account.payment.inherit.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <field name="communication" position="after">
+				<field name="bsd_tenancy_id" domain="[('bsd_tenant_id.id', '=', partner_id)]"/>
+			</field>
+			<!--<xpath expr="/form/header/button[@name='post']" position="after">-->
+				<!--<button name="back_to_tenancy" states="posted" string="Back" type="object" class="oe_highlight"/>-->
+			<!--</xpath>-->
+        </field>
+    </record>
+</odoo>

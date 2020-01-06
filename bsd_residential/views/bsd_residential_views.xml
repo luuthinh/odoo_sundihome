@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_residential_tree">
+        <field name="name">bsd.residential.tree</field>
+        <field name="model">bsd.residential</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="bsd_mobile"/>
+                <field name="bsd_email"/>
+                <field name="bsd_function"/>
+                <field name="bsd_relationship_id"/>
+                <field name="bsd_date_move_on"/>
+                <field name="bsd_date_move_out"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_residential_responsible_history_tree">
+        <field name="name">bsd.residential.responsible.history.tree</field>
+        <field name="model">bsd.residential.responsible.history</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="bsd_cmnd"/>
+                <field name="bsd_from_date"/>
+                <field name="bsd_to_date"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

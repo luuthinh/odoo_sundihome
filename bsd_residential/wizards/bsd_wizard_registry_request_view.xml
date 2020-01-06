@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_wizard_registry_request_form_view">
+        <field name="name">bsd.wizard.registry.request.form</field>
+        <field name="model">bsd.wizard.registry.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="bsd_request_id" readonly="1"/>
+                        <field name="bsd_partner_id"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Add" name="add_partner" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_wizard_registry_request_action">
+        <field name="name">Khách hàng</field>
+        <field name="res_model">bsd.wizard.registry.request</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_tenancy_renew_form">
+        <field name="name">bsd.tenancy.renew.form</field>
+        <field name="model">bsd.tenancy.renew</field>
+        <field name="arch" type="xml">
+            <form string="Renew Tenancy Wizard">
+				<p colspan="2" class="oe_edit_only oe_grey">
+					Fill up Start date, End date and Periods To Renew Tenancy.
+				</p>
+				<group col="2" colspan="2">
+                    <field name="bsd_tenancy_id" invisible="1"/>
+					<field name="bsd_start_date" required="1"/>
+					<field name="bsd_expiration_date" required="1"/>
+					<field name="bsd_rent_type_id" widget="selection"/>
+				</group>
+				<footer>
+					<button name="renew_contract" type="object" string="Renew" class="oe_highlight"/>
+					<button string="Cancel" class="oe_link" special="cancel"/>
+				</footer>
+			</form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_tenancy_renew_action">
+        <field name="name">Tenancy Renew</field>
+        <field name="res_model">bsd.tenancy.renew</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

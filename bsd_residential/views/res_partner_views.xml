@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_res_partner_form">
+        <field name="name">bsd.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="bsd_birthday"/>
+                <field name="bsd_cmnd"/>
+                <field name="bsd_is_master"/>
+                <field name="bsd_temp_address"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Thông tin chủ hộ">
+                    <!--<field name="bsd_type" 	widget="many2many_tags"/>-->
+                    <div>
+                        <label for="bsd_master_ids"/>
+                        <field name="bsd_master_ids" context="{'form_view_ref' : 'bsd_real_estate.bsd_account_asset_form', 'tree_view_ref' : 'bsd_real_estate.bsd_account_asset_tree'}"/>
+                    </div>
+                    <div>
+                        <label for="bsd_owned_ids"/>
+                        <field name="bsd_owned_ids" context="{'form_view_ref' : 'bsd_real_estate.bsd_account_asset_form', 'tree_view_ref' : 'bsd_real_estate.bsd_account_asset_tree'}"/>
+                    </div>
+                    <!--<div>-->
+                        <!--<label for="bsd_rental_ids"/>-->
+                        <!--<field name="bsd_rental_ids">-->
+                            <!--<tree>-->
+                                <!--<field name="bsd_unit_id"/>-->
+                                <!--<field name="bsd_project_id"/>-->
+                                <!--<field name="bsd_block_id"/>-->
+                                <!--<field name="bsd_floor_id"/>-->
+                                <!--<field name="bsd_contract"/>-->
+                                <!--<field name="bsd_from_date"/>-->
+                                <!--<field name="bsd_to_date"/>-->
+                            <!--</tree>-->
+                        <!--</field>-->
+                    <!--</div>-->
+
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_res_partner_action">
+        <field name="name">Cư Dân</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="xml">
+            <p class="o_view_nocontent_smiling_face">Tạo cư dân</p>
+        </field>
+    </record>
+</odoo>

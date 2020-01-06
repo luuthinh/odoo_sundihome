@@ -1,0 +1,36 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+bsd_real_estate_project_manager,Model manager bsd_real_estate_project,model_bsd_real_estate_project,bsd_real_estate.group_manager,1,1,1,0
+bsd_real_estate_project_user,Model user bsd_real_estate_project,model_bsd_real_estate_project,bsd_real_estate.group_user,1,1,0,0
+bsd_real_estate_project_portal,Model portal bsd_real_estate_project,model_bsd_real_estate_project,base.group_portal,1,0,0,0
+
+bsd_real_estate_block_manager,Model manager bsd_real_estate_block,model_bsd_real_estate_block,bsd_real_estate.group_manager,1,1,1,0
+bsd_real_estate_block_user,Model user bsd_real_estate_block,model_bsd_real_estate_block,bsd_real_estate.group_user,1,1,0,0
+bsd_real_estate_block_portal,Model portal bsd_real_estate_block,model_bsd_real_estate_block,base.group_portal,1,0,0,0
+
+bsd_real_estate_floor_manager,Model manager bsd_real_estate_floor,model_bsd_real_estate_floor,bsd_real_estate.group_manager,1,1,1,0
+bsd_real_estate_floor_user,Model user bsd_real_estate_floor,model_bsd_real_estate_floor,bsd_real_estate.group_user,1,1,0,0
+bsd_real_estate_floor_portal,Model portal bsd_real_estate_floor,model_bsd_real_estate_floor,base.group_portal,1,0,0,0
+bsd_contract_tenancy_schedule_manager,Model manager bsd_contract_tenancy_schedule,model_bsd_contract_tenancy_schedule,bsd_real_estate.group_manager,1,1,1,1
+bsd_contract_tenancy_rent_manager,Model manager bsd_contract_tenancy_rent,model_bsd_contract_tenancy_rent,bsd_real_estate.group_manager,1,1,1,1
+bsd_project_type_manager,Model manager bsd_project_type,model_bsd_project_type,bsd_real_estate.group_manager,1,1,1,1
+bsd_block_type_manager,Model manager bsd_block_type,model_bsd_block_type,bsd_real_estate.group_manager,1,1,1,1
+bsd_floor_type_manager,Model manager bsd_floor_type,model_bsd_floor_type,bsd_real_estate.group_manager,1,1,1,1
+bsd_unit_category_manager,Model manager bsd_unit_category,model_bsd_unit_category,bsd_real_estate.group_manager,1,1,1,1
+bsd_room_type_manager,Model manager bsd_room_type,model_bsd_room_type,bsd_real_estate.group_manager,1,1,1,1
+bsd_amenities_manager,Model manager bsd_amenities,model_bsd_amenities,bsd_real_estate.group_manager,1,1,1,1
+bsd_unit_view_manager,Model manager bsd_unit_view_manager,model_bsd_unit_view,bsd_real_estate.group_manager,1,1,1,1
+bsd_rent_type_manager,Model manager bsd_rent_type_manager,model_bsd_rent_type,bsd_real_estate.group_manager,1,1,1,1
+
+bsd_tenancy_renew_manager,Model manager bsd_tenancy_renew,model_bsd_tenancy_renew,bsd_real_estate.group_manager,1,1,1,1
+
+bsd_room_detail_manager,Model manager bsd_room_detail,model_bsd_room_detail,bsd_real_estate.group_manager,1,1,1,1
+
+bsd_account_asset_stage_manager,Model manager bsd_account_asset_stage,model_bsd_account_asset_stage,bsd_real_estate.group_manager,1,1,1,1
+
+bsd_contract_sale_manager,Model manager bsd_contract_sale_manager,model_bsd_contract_sale,bsd_real_estate.group_manager,1,1,1,1
+bsd_contract_sale_unit_manager,Model manager bsd_contract_sale_unit_manager,model_bsd_contract_sale_unit,bsd_real_estate.group_manager,1,1,1,1
+
+bsd_account_asset,Model portal account_asset,model_account_asset,base.group_portal,1,0,0,0
+
+bsd_project_area_manager,Model manager bsd_project_area,model_bsd_project_area,bsd_real_estate.group_manager,1,1,1,1

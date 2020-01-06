@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.rule" id="residential_service_portal_public_rule">
+        <field name="name">bsd_residential_service: portal/public: access on my service</field>
+        <field name="model_id" ref="bsd_residential.model_bsd_residential_service"/>
+        <field name="domain_force">[('bsd_partner_id','in',[user.partner_id.id,user.commercial_partner_id.id])]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal')), (4, ref('base.group_public'))]"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_read" eval="True"/>
+    </record>
+
+    <record model="ir.rule" id="register_request_portal_public_rule">
+        <field name="name">bsd_register_request: portal/public: access on my request</field>
+        <field name="model_id" ref="bsd_residential.model_bsd_registry_request"/>
+        <field name="domain_force">[('bsd_partner_id', 'in',[user.partner_id.id,user.commercial_partner_id.id])]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal')), (4, ref('base.group_public'))]"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_read" eval="True"/>
+    </record>
+
+    <record model="ir.rule" id="bsd_residential_portal_public_rule">
+        <field name="name">bsd_residential: portal/public: access on my unit</field>
+        <field name="model_id" ref="bsd_residential.model_bsd_residential"/>
+        <field name="domain_force">[('bsd_unit_id.id', 'in',user.partner_id.bsd_master_ids.ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal')), (4, ref('base.group_public'))]"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_read" eval="True"/>
+    </record>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_account_asset_form">
+        <field name="name">bsd.unit.form</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="bsd_real_estate.bsd_account_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="view_history_residential"
+                        string="Lịch sử cư dân"
+                        type="object"
+                        icon = 'fa-archive'
+                        class="oe_stat_button">
+                </button>
+                <button name="view_history_responsible"
+                        string="Lịch sử chủ hộ"
+                        type="object"
+                        icon = 'fa-archive'
+                        class="oe_stat_button">
+                </button>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                        <page string="Cư dân">
+                            <field name="bsd_residential_ids" mode="tree,kanban"
+                                   context="{'default_bsd_unit_id':id}">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="bsd_mobile"/>
+                                    <field name="bsd_email"/>
+                                    <field name="bsd_function"/>
+                                    <field name="bsd_relationship_id"/>
+                                    <field name="bsd_date_move_on"/>
+                                    <field name="bsd_date_move_out"/>
+                                    <field name="state"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <div class="oe_title">
+                                                    <h2><field name="name"/></h2>
+                                                </div>
+                                                <field name="bsd_mobile"/>
+                                                <field name="bsd_email"/>
+                                                <field name="bsd_function"/>
+                                                <field name="bsd_relationship_id"/>
+                                            </group>
+                                            <group>
+                                                <field name="bsd_image" widget="image" class="oe_right oe_image_custom" style="width: 100px; height: 100px;"/>
+                                            </group>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

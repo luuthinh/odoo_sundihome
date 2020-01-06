@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--<template id="_assets_primary_variables" inherit_id="web._assets_primary_variables">-->
+        <!--<xpath expr="//link[last()]" position="after">-->
+            <!--<link rel="stylesheet" type="text/scss" href="/hr_org_chart/static/src/scss/variables.scss"/>-->
+        <!--</xpath>-->
+    <!--</template>-->
+
+    <template id="assets_backend" name="bsd_real_estate_org_chart_assets" inherit_id="web.assets_backend">
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript" src="/bsd_real_estate_org_chart/static/js/bsd_real_estate_org_chart.js"></script>
+        </xpath>
+    </template>
+
+    <record id="bsd_real_estate_org_chart_action" model="ir.actions.client">
+         <field name="name">Overview</field>
+         <field name="tag">org_chart_view</field>
+    </record>
+    <menuitem id="bsd_overview_menu"
+              name="Overview"
+              parent="bsd_real_estate.bsd_main_project_management_root"
+              sequence="5"
+              action="bsd_real_estate_org_chart.bsd_real_estate_org_chart_action"
+    />
+</odoo>

@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+bsd_project_manager,Model manager bsd_project,model_bsd_project,bsd_manager_project.group_manager,1,1,1,1
+bsd_screen_manager,Model manager bsd_screen,model_bsd_screen,bsd_manager_project.group_manager,1,1,1,1
+bsd_ba_request_manager,Model manager bsd_ba_request,model_bsd_ba_request,bsd_manager_project.group_manager,1,1,1,1
+bsd_ba_request_type_manager,Model manager bsd_ba_request_type,model_bsd_ba_request_type,bsd_manager_project.group_manager,1,1,1,1
+
+bsd_project_user,Model user bsd_project,model_bsd_project,bsd_manager_project.group_user,1,1,1,0
+bsd_screen_user,Model user bsd_screen,model_bsd_screen,bsd_manager_project.group_user,1,1,1,0
+bsd_ba_request_user,Model user bsd_ba_request,model_bsd_ba_request,bsd_manager_project.group_user,1,1,1,0
+bsd_ba_request_type_user,Model user bsd_ba_request_type,model_bsd_ba_request_type,bsd_manager_project.group_user,1,1,1,0
