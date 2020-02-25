@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_unit_create_invoice_form_view">
+        <field name="name">bsd.unit.create.invoice.form</field>
+        <field name="model">bsd.unit.create.invoice</field>
+        <field name="arch" type="xml">
+            <form string="Xuất hóa đơn">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="bsd_unit_ids" widget="many2many_tags"/>
+                            <label for="bsd_month"/>
+                            <div class="d-flex">
+                                <field name="bsd_month" />
+                                <span class="o_form_label mx-3 oe_edit_only"> <strong>Năm</strong></span>
+                                <field name="bsd_year"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="bsd_date_invoice"/>
+                            <field name="bsd_due_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="bsd_invoice_origin"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="create_invoice" type="object"
+                            string="Xuất hóa đơn" class="oe_highlight"/>
+                    <button special="cancel" string="Hủy bỏ"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="bsd_unit_create_invoice_view"
+                name="Xuất hóa đơn"
+                binding_model="bsd.unit"
+                binding_views="list,form"
+                res_model="bsd.unit.create.invoice"
+                view_mode="form"
+                view_id="bsd_service_residential.bsd_unit_create_invoice_form_view"
+                target="new"/>
+</odoo>

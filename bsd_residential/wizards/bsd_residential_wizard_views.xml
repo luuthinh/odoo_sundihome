@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record model="ir.ui.view" id="bsd_residential_wizard_form_view">
+        <field name="name">bsd.residential.wizard.form</field>
+        <field name="model">bsd.residential.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Chuyển cư dân">
+                <field name="bsd_residential_ids"/>
+                <footer>
+                    <button name="update_residential" type="object"
+                            string="Chuyển cư dân" class="oe_highlight"/>
+                    <button special="cancel" string="Hủy bỏ"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="bsd_residential_wizard_view"
+                name="Chuyển cư dân"
+                binding_model="bsd.residential"
+                binding_views="list,form"
+                res_model="bsd.residential.wizard"
+                view_mode="form"
+                view_id="bsd_residential.bsd_residential_wizard_form_view"
+                target="new"/>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_wizard_gym_run_form_view">
+        <field name="name">bsd.wizard.gym.run.form</field>
+        <field name="model">bsd.wizard.gym.run</field>
+        <field name="arch" type="xml">
+            <form string="Tập lại">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="bsd_residential_gym_id"/>
+                            <field name="bsd_date"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_add" type="object"
+                            string="Xác nhận" class="oe_highlight"/>
+                    <button special="cancel" string="Hủy bỏ"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_wizard_gym_run_action">
+        <field name="name">Tập lại</field>
+        <field name="res_model">bsd.wizard.gym.run</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_residential_tennis_form">
+        <field name="name">bsd.residential.tennis.form</field>
+        <field name="model">bsd.residential.tennis</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Tạo mã qr"
+                            states="draft"
+                            type="object"
+                            name="action_card"
+                            class="oe_highlight"/>
+                    <button string="Thu tiền"
+                            states="confirm"
+                            type="object"
+                            name="action_payment"
+                            class="oe_highlight"/>
+                    <button string="Hoàn thành"
+                            type="object"
+                            states="confirm"
+                            name="action_done"
+                            class="oe_highlight"/>
+                    <button string="Hủy"
+                            type="object"
+                            name="action_cancel"
+                            class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done,cancel"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="bsd_product_id"/>
+                            <field name="bsd_residential_id"/>
+                            <field name="bsd_partner_id" invisible="1"/>
+                            <field name="bsd_unit_id"/>
+                            <field name="bsd_due_date"/>
+                            <field name="bsd_duration" widget="float_time"/>
+                            <field name="bsd_int_person"/>
+                        </group>
+                        <group>
+                            <field name="bsd_start_time"/>
+                            <field name="bsd_end_time"/>
+                            <field name="bsd_price"/>
+                            <field name="bsd_tennis_id"/>
+                            <field name="bsd_payment_id"/>
+                            <field name="bsd_cancel_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="bsd_qr_code" widget="image"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_residential_tennis_tree">
+        <field name="name">bsd.residential.tennis.tree</field>
+        <field name="model">bsd.residential.tennis</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="state=='cancel'"
+                  decoration-success="state=='done'"
+                  decoration-primary="state=='confirm'"
+                  decoration-info="state=='draft'">
+                <field name="name"/>
+                <field name="bsd_tennis_id"/>
+                <field name="bsd_residential_id"/>
+                <field name="bsd_start_time"/>
+                <field name="bsd_end_time"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_residential_tennis_gantt">
+            <field name="name">bsd.residential.tennis.gantt</field>
+            <field name="model">bsd.residential.tennis</field>
+            <field name="arch" type="xml">
+                <gantt string="Đăng ký sân tennis"
+                       date_start="bsd_start_time"
+                       date_stop="bsd_end_time"
+                       color="bsd_residential_id"
+                       decoration-warning="state == 'draft'"
+                       decoration-info="state == 'confirm'"
+                       decoration-secondary ="state == 'payment'"
+                       decoration-success="state == 'done'"
+                       decoration-danger="state == 'cancel'"
+                       default_group_by='bsd_tennis_id'>
+                    <field name="state"/>
+                    <field name="bsd_residential_id"/>
+                    <field name="bsd_end_time"/>
+                    <field name="bsd_start_time"/>
+                    <field name="bsd_tennis_id"/>
+                </gantt>
+            </field>
+        </record>
+    <record model="ir.actions.act_window" id="bsd_residential_tennis_action">
+        <field name="name">Đăng ký sân tennis</field>
+        <field name="res_model">bsd.residential.tennis</field>
+        <field name="view_mode">tree,form,gantt</field>
+    </record>
+</odoo>

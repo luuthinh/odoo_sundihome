@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.actions.act_window" id="bsd_partner_tenant_res_action">
+        <field name="name">Khách thuê căn hộ</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('bsd_is_tenant_res', '=', True)]</field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_partner_tenant_off_action">
+        <field name="name">Khách thuê văn phòng</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('bsd_is_tenant_off', '=', True)]</field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_partner_tenant_mall_action">
+        <field name="name">Khách thuê TTTM</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('bsd_is_tenant_mall', '=', True)]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_partner_owner_action">
+        <field name="name">Chủ sở hữu</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('bsd_is_owner', '=', True)]</field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_res_partner_form">
+        <field name="name">bsd.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Hợp đồng">
+                    <!--<field name="bsd_type" 	widget="many2many_tags"/>-->
+                    <div>
+                        <label for="bsd_contract_sale_ids"/>
+                        <field name="bsd_contract_sale_ids"/>
+                    </div>
+                    <div>
+                        <label for="bsd_contract_tenancy_ids"/>
+                        <field name="bsd_contract_tenancy_ids"/>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

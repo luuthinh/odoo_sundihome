@@ -1,31 +1,103 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record model="ir.ui.view" id="bsd_residential_form">
+        <field name="name">bsd.residential.form</field>
+        <field name="model">bsd.residential</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Họ tên"/>
+                        <h2><field name="name"/></h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="bsd_cmnd"/>
+                            <field name="bsd_cmnd_date"/>
+                            <field name="bsd_cmnd_state"/>
+                            <field name="bsd_gender"/>
+                            <field name="bsd_birthday"/>
+                        </group>
+                        <group>
+                            <field name="bsd_code"/>
+                            <field name="bsd_card_id"/>
+                            <field name="bsd_card_date"/>
+                            <field name="state"/>
+                            <field name="bsd_unit_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lịch sử cư trú">
+                            <field name="bsd_history_ids">
+                                <tree editable="bottom">
+                                    <field name="bsd_unit_id"/>
+                                    <field name="bsd_date_move_on"/>
+                                    <field name="bsd_date_move_out"/>
+                                    <field name="bsd_relationship_id"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Liên hệ">
+                            <group>
+                                <group>
+                                    <field name="partner_id"
+                                           required="0"
+                                           attrs="{'invisible':[('id','=',False)]}"
+                                           string="Liên hệ" readonly="1"/>
+                                    <field name="email"/>
+                                    <field name="mobile"/>
+                                </group>
+                                <group>
+                                    <field name="vat"/>
+                                    <field name="function"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
     <record model="ir.ui.view" id="bsd_residential_tree">
         <field name="name">bsd.residential.tree</field>
         <field name="model">bsd.residential</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="bsd_code"/>
+                <field name="bsd_card_id"/>
                 <field name="name"/>
-                <field name="bsd_mobile"/>
-                <field name="bsd_email"/>
-                <field name="bsd_function"/>
-                <field name="bsd_relationship_id"/>
-                <field name="bsd_date_move_on"/>
-                <field name="bsd_date_move_out"/>
+                <field name="bsd_unit_id"/>
+                <field name="mobile"/>
                 <field name="state"/>
             </tree>
         </field>
     </record>
-    <record model="ir.ui.view" id="bsd_residential_responsible_history_tree">
-        <field name="name">bsd.residential.responsible.history.tree</field>
-        <field name="model">bsd.residential.responsible.history</field>
+
+    <record model="ir.ui.view" id="bsd_residential_select">
+        <field name="name">bsd.residential.select</field>
+        <field name="model">bsd.residential</field>
         <field name="arch" type="xml">
-            <tree>
+            <search>
                 <field name="name"/>
                 <field name="bsd_cmnd"/>
-                <field name="bsd_from_date"/>
-                <field name="bsd_to_date"/>
-            </tree>
+                <filter string="Cư trú" name="filter_in" domain="[('state', '=', 'in')]"/>
+                <filter string="Đã chuyển đi" name="filter_out" domain="[('state', '=', 'out')]"/>
+            </search>
         </field>
+
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_residential_res_action">
+        <field name="name">Cư dân</field>
+        <field name="res_model">bsd.residential</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_filter_in': True}</field>
     </record>
 </odoo>

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record model="ir.ui.view" id="view_order_form_inherit">
-        <field name="name">bsd.view_order_form_inherit</field>
+    <record model="ir.ui.view" id="bsd_sale_order_form_inherit">
+        <field name="name">bsd.sale.order.form.inherit</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="bsd_temp_address"
-                       context="{'form_view_ref' : 'bsd_real_estate.bsd_account_asset_form', 'tree_view_ref' : 'bsd_real_estate.bsd_account_asset_tree'}"/>
-                <field name="bsd_request_service_id"/>
+            <xpath expr="//field[@name='partner_id']" position="before">
+                <field name="bsd_residential_id"/>
+                <field name="bsd_unit_id"/>
             </xpath>
         </field>
     </record>

@@ -1,0 +1,31 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+bsd_block_manager,Model manager bsd_block,model_bsd_block,bsd_block.group_manager,1,1,1,0
+bsd_block_user,Model user bsd_block,model_bsd_block,bsd_block.group_user,1,1,1,0
+bsd_block_portal,Model portal bsd_block,model_bsd_block,base.group_portal,1,0,0,0
+
+bsd_area_manager,Model manager bsd_area,model_bsd_area,bsd_block.group_manager,1,1,1,1
+
+bsd_floor_manager,Model manager bsd_floor,model_bsd_floor,bsd_block.group_manager,1,1,1,0
+bsd_floor_user,Model user bsd_floor,model_bsd_floor,bsd_block.group_user,1,1,1,0
+bsd_floor_portal,Model portal bsd_floor,model_bsd_floor,base.group_portal,1,0,0,0
+
+bsd_block_type_manager,Model manager bsd_block_type,model_bsd_block_type,bsd_block.group_manager,1,1,1,1
+
+bsd_floor_type_manager,Model manager bsd_floor_type,model_bsd_floor_type,bsd_block.group_manager,1,1,1,1
+bsd_floor_for_manager,Model manager bsd_floor_for,model_bsd_floor_for,bsd_block.group_manager,1,1,1,1
+
+bsd_unit_category_manager,Model manager bsd_unit_category,model_bsd_unit_category,bsd_block.group_manager,1,1,1,1
+
+bsd_room_type_manager,Model manager bsd_room_type,model_bsd_room_type,bsd_block.group_manager,1,1,1,1
+
+bsd_amenities_manager,Model manager bsd_amenities,model_bsd_amenities,bsd_block.group_manager,1,1,1,1
+
+bsd_project_manager,Model manager bsd_project,model_bsd_project,bsd_block.group_manager,1,1,1,1
+
+bsd_unit_manager,Model manager bsd_unit,model_bsd_unit,bsd_block.group_manager,1,1,1,1
+bsd_unit_user,Model user bsd_unit,model_bsd_unit,bsd_block.group_user,1,1,1,0
+bsd_unit,Model portal bsd_unit,model_bsd_unit,base.group_portal,1,0,0,0
+
+bsd_block_fee_manager,Model manager bsd_block_fee,model_bsd_block_fee,bsd_block.group_manager,1,1,1,1
+

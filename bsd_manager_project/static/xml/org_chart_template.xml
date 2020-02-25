@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<templates xml:space="preserve">
-    <t t-name="bsd_manager_project.org_chart">
-        <select id="select" style="display: inline-block; width: 20%; height:auto; margin-top: 10px; font-size:25px;">
-        </select>
-        <div id="chart">
-        </div>
-    </t>
-</templates>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_uom_m2_month" model="uom.uom">
+            <field name="category_id" ref="uom.uom_categ_wtime"/>
+            <field name="name">m2/tháng</field>
+            <field name="factor" eval="1.0"/>
+            <field name="uom_type">smaller</field>
+        </record>
+    </data>
+</odoo>

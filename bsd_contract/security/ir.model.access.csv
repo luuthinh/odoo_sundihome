@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+bsd_contract_tenancy_manager,Model manager bsd_contract_tenancy,model_bsd_contract_tenancy,bsd_contract.group_manager,1,1,1,1
+bsd_contract_tenancy_user,Model user bsd_contract_tenancy,model_bsd_contract_tenancy,bsd_contract.group_user,1,1,1,0
+
+bsd_contract_sale_manager,Model manager bsd_contract_sale,model_bsd_contract_sale,bsd_contract.group_manager,1,1,1,1
+bsd_contract_sale_user,Model user bsd_contract_sale,model_bsd_contract_sale,bsd_contract.group_user,1,1,1,0
+
+bsd_contract_tenancy_schedule_manager,Model manager bsd_contract_tenancy_schedule,model_bsd_contract_tenancy_schedule,bsd_contract.group_manager,1,1,1,1
+bsd_contract_tenancy_schedule_user,Model user bsd_contract_tenancy_schedule,model_bsd_contract_tenancy_schedule,bsd_contract.group_user,1,1,1,0
+
+bsd_rent_type_manager,Model manager bsd_rent_type,model_bsd_rent_type,bsd_contract.group_manager,1,1,1,1
+bsd_rent_type_user,Model user bsd_rent_type,model_bsd_rent_type,bsd_contract.group_user,1,1,1,0

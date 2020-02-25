@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_residential_electric_tree">
+        <field name="name">bsd.residential.electric.tree</field>
+        <field name="model">bsd.residential.electric</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bsd_unit_id"/>
+                <field name="bsd_partner_id"/>
+                <field name="bsd_old_index"/>
+                <field name="bsd_new_index"/>
+                <field name="bsd_total"/>
+                <field name="bsd_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_residential_electric_form">
+        <field name="name">bsd.residential.electric.form</field>
+        <field name="model">bsd.residential.electric</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="bsd_unit_id"/>
+                            <field name="bsd_partner_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="bsd_product_id"/>
+                            <field name="bsd_old_date"/>
+                            <field name="bsd_old_index"/>
+                            <field name="bsd_old_employee_id"/>
+                        </group>
+                        <group>
+                            <field name="bsd_new_date"/>
+                            <field name="bsd_new_index"/>
+                            <field name="bsd_new_employee_id"/>
+                            <field name="bsd_total"/>
+                            <field name="bsd_price"/>
+                            <label for="bsd_month"/>
+                            <div class="d-flex">
+                                <field name="bsd_month" />
+                                <span class="o_form_label mx-3"> <strong>Năm</strong></span>
+                                <field name="bsd_year"/>
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_residential_electric_action">
+        <field name="name">Chỉ số điện</field>
+        <field name="res_model">bsd.residential.electric</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

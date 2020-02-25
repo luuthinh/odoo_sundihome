@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_unit_form">
+        <field name="name">bsd.unit.form.inherit</field>
+        <field name="model">bsd.unit</field>
+        <field name="inherit_id" ref="bsd_block.bsd_unit_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="bsd_date_invoice"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Giữ xe">
+                    <field name="bsd_vehicle_ids" domain="[('state', 'in',['card','cancel'])]">
+                        <tree>
+                            <field name="bsd_license"/>
+                            <field name="bsd_card"/>
+                            <field name="bsd_residential_id"/>
+                            <field name="bsd_product_id"/>
+                            <field name="bsd_date_accuracy"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Chỉ số điện">
+                    <field name="bsd_electric_ids" context="{'default_bsd_unit_id':id, 'default_bsd_partner_id':bsd_responsible_id}">
+                        <tree>
+                            <field name="bsd_old_index"/>
+                            <field name="bsd_new_index"/>
+                            <field name="bsd_total"/>
+                            <field name="bsd_price"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Chỉ số nước">
+                    <field name="bsd_water_ids" context="{'default_bsd_unit_id':id, 'default_bsd_partner_id':bsd_responsible_id}">
+                        <tree>
+                            <field name="bsd_unit_id" invisible="1"/>
+                            <field name="bsd_partner_id" invisible="1"/>
+                            <field name="bsd_old_index"/>
+                            <field name="bsd_new_index"/>
+                            <field name="bsd_total"/>
+                            <field name="bsd_price"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Hóa đơn">
+                    <field name="bsd_invoice_ids" readonly="1">
+                        <tree decoration-info="state == 'draft'" string="Hóa đơn" decoration-muted="state == 'cancel'" js_class="account_tree">
+                            <field name="bsd_unit_id" invisible="1"/>
+                            <field name="name" string="Số hóa đơn"/>
+                            <field name="partner_id" invisible="1"/>
+                            <field name="invoice_date" optional="show" invisible="context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt')" string="Invoice Date"/>
+                            <field name="invoice_origin" optional="show" string="Nội dung"/>
+                            <field name="invoice_payment_ref" optional="hide" invisible="context.get('default_type') in ('out_invoice', 'out_refund','out_receipt')"/>
+                            <!--<field name="invoice_user_id" optional="show" invisible="context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt')" string="Sales Person"/>-->
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" optional="show"/>
+                            <field name="invoice_date_due" optional="show"/>
+                            <field name="amount_untaxed_signed" string="Tax Excluded" sum="Total" optional="hide"/>
+                            <field name="amount_tax_signed" string="Tax" sum="Total" optional="hide"/>
+                            <field name="amount_total_signed" string="Số tiền" sum="Total" optional="show"/>
+                            <field name="amount_residual_signed" string="Còn lại" sum="Tổng" optional="show"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="company_currency_id" invisible="1"/>
+                            <field name="state" optional="show" string="Trạng thái"/>
+                            <field name="invoice_payment_state" optional="show" string="Phiếu thu"/>
+                            <field name="type" invisible="context.get('default_type', True)"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_unit_tree">
+        <field name="name">bsd.unit.tree.inherit</field>
+        <field name="model">bsd.unit</field>
+        <field name="inherit_id" ref="bsd_block.bsd_unit_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bsd_count_residential']" position="after">
+                <field name="bsd_count_vehicle"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

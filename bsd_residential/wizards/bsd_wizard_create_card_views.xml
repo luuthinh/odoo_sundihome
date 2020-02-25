@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_wizard_create_card_form">
+        <field name="name">bsd.wizard.create.card.form</field>
+        <field name="model">bsd.wizard.create.card</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="bsd_line_ids" options="{'no_create':1}" >
+                        <tree editable="bottom" create='false' delete="false">
+                            <field name="bsd_residential_id"/>
+                            <field name="bsd_card_id" domain="[('state','=','new')]"/>
+                            <field name="bsd_card_date"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <button name="create_card" type="object" string="Cấp thẻ" class="oe_highlight"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_wizard_create_card_action">
+        <field name="name">Bảng cấp thẻ</field>
+        <field name="res_model">bsd.wizard.create.card</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

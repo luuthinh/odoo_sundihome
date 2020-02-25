@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <record id="seq_bsd_registry_request" model="ir.sequence">
-            <field name="name">Registry Request</field>
+            <field name="name">Phiếu đăng ký cư dân</field>
             <field name="code">bsd.registry.request</field>
             <field name="prefix">Req/%(range_year)s/</field>
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
         </record>
 
-        <record id="seq_bsd_service_request" model="ir.sequence">
-            <field name="name">Service Request</field>
-            <field name="code">bsd.residential.service</field>
-            <field name="prefix">Ser/%(range_year)s/</field>
+        <record id="seq_bsd_registry_card" model="ir.sequence">
+            <field name="name">Phiếu đăng ký thẻ cư dân</field>
+            <field name="code">bsd.registry.card</field>
+            <field name="prefix">Card/%(range_year)s/</field>
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
         </record>
 
-        <record id="parking_service" model="bsd.residential.service.type">
-            <field name="name">Đăng ký giữ xe</field>
+        <record id="seq_bsd_residential" model="ir.sequence">
+            <field name="name">Mã cư dân</field>
+            <field name="code">bsd.residential</field>
+            <field name="prefix"></field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
         </record>
-    </data>
+\    </data>
 </odoo>

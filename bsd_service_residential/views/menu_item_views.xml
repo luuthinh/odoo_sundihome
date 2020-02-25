@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Top menu-->
+    <menuitem id="bsd_main_service_residential_root" name="Dịch vụ"/>
+
+    <menuitem id="bsd_residential_vehicle_menu_action"
+              name="Đăng ký giữ xe"
+              parent="bsd_main_service_residential_root"
+              action="bsd_residential_vehicle_action"/>
+    <menuitem id="bsd_residential_electric_menu_action"
+              name="Điện"
+              parent="bsd_main_service_residential_root"
+              action="bsd_residential_electric_action"/>
+    <menuitem id="bsd_residential_water_menu_action"
+              name="Nước"
+              parent="bsd_main_service_residential_root"
+              action="bsd_residential_water_action"/>
+
+    <menuitem id="bsd_residential_gym_menu"
+              name="Gym"
+              parent="bsd_main_service_residential_root"/>
+
+    <menuitem id="bsd_residential_gym_menu_action"
+              name="Hội viên"
+              parent="bsd_residential_gym_menu"
+              action="bsd_residential_gym_action"/>
+
+    <menuitem id="bsd_residential_gym_pause_menu_action"
+              name="Lịch bảo lưu"
+              parent="bsd_residential_gym_menu"
+              action="bsd_residential_gym_pause_action"/>
+
+    <menuitem id="bsd_residential_swim_menu"
+              name="Hồ bơi"
+              parent="bsd_main_service_residential_root"/>
+    <menuitem id="bsd_residential_swim_menu_action"
+              name="Hội viên"
+              parent="bsd_residential_swim_menu"
+              action="bsd_residential_swim_action"/>
+    <menuitem id="bsd_residential_swim_pause_menu_action"
+              name="Lịch bảo lưu"
+              parent="bsd_residential_swim_menu"
+              action="bsd_residential_swim_pause_action"/>
+
+
+    <menuitem id="bsd_residential_tennis_menu_action"
+              name="Tennis"
+              parent="bsd_main_service_residential_root"
+              action="bsd_residential_tennis_action"/>
+
+    <menuitem id="bsd_residential_bbq_menu_action"
+              name="BBQ"
+              parent="bsd_main_service_residential_root"
+              action="bsd_residential_bbq_action"/>
+
+    <menuitem id="bsd_residential_transfer_menu_action"
+              action="bsd_residential_transfer_action"
+              parent="bsd_main_service_residential_root"
+              name="Dọn/Chuyển đồ"/>
+
+    <menuitem id="bsd_residential_config_menu"
+              name="Cài đặt"
+              parent="bsd_main_service_residential_root"/>
+
+
+    <record id="bsd_service_residential.bsd_main_service_residential_root" model="ir.ui.menu">
+        <field name="action" eval="False"/>
+        <field name="active" eval="True"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="name">Dịch vụ</field>
+        <field name="parent_id" eval="False"/>
+        <field name="sequence">10</field>
+        <field name="web_icon">fa fa-money,#FFFFFF,#AA9A2E</field>
+    </record>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_account_move_form">
+        <field name="name">bsd.account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="bsd_unit_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_account_move_tree">
+        <field name="name">bsd.account.move.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="bsd_unit_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

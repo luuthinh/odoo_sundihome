@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <report id="report_giay_bao_phi"
+            model="account.move"
+            string="Giấy báo phí sinh hoạt"
+            name="bsd_service_residential.report_giay_bao_phi_view"
+            file="bsd_service_residential.report_giay_bao_phi_view"
+            report_type="qweb-html"/>
+
+        <template id="report_giay_bao_phi_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="text-center">
+                        <h2>Giấy báo phí dịch vụ cư dân</h2>
+                        <h5><span t-field="doc.invoice_date" t-field-options='{"format": "MMM-yyyy"}'/></h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <h5>Tòa nhà: <span t-field="doc.bsd_unit_id.bsd_block_id"/></h5>
+                        </div>
+                        <div class="col-4">
+                            <h5>Căn hộ: <span t-field="doc.bsd_unit_id"/></h5>
+                        </div>
+                        <div class="col-4">
+                            <h5>Chủ hộ: <span t-field="doc.bsd_unit_id.bsd_responsible_id"/></h5>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <table class="table table-condensed table table-striped"
+                               style="table-layout:fixed;">
+                            <thead>
+                                <tr>
+                                    <th width="10px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                        STT
+                                    </th>
+                                    <th width="30px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                        Nội dung thu
+                                    </th>
+                                    <th width="10px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                        ĐVT
+                                    </th>
+                                    <th width="10px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                        Số lượng
+                                    </th>
+                                    <th width="20px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                        Đơn giá
+                                    </th>
+                                    <th width="40px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                        Thành tiền
+                                    </th>
+                                    <th width="90px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                        Ghi chú
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="index" t-value="0"/>
+                                <t t-foreach="doc.invoice_line_ids" t-as="line">
+                                    <t t-set="index" t-value="index + 1"/>
+                                    <tr>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-esc="index"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-field="line.name"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-field="line.product_uom_id"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-field="line.quantity"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-field="line.price_unit"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div t-field="line.price_subtotal"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-8"/>
+                        <div class="col-4">
+                            <div class="text-center">
+                                <p>Ngày....tháng....năm.....</p>
+                                <p>BQL Chung cư</p>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <p>Người lập phiếu</p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_unit_form">
+        <field name="name">bsd.unit.form</field>
+        <field name="model">bsd.unit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="view_stock_quant"
+                                string="Thiết bị"
+                                type="object"
+                                icon = 'fa-gear'
+                                class="oe_stat_button">
+                        </button>
+                    </div>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h2><field name="complete_name"/></h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="bsd_block_id"/>
+                            <field name="bsd_floor_id"
+                                   domain="[('bsd_block_id','in',[bsd_block_id])]"
+                                   attrs="{'required':[('bsd_block_id','!=',False)]}"/>
+                            <field name="bsd_type"/>
+                            <field name="bsd_categ_id"/>
+                        </group>
+                        <group>
+                            <field name="bsd_owner_id"/>
+                            <field name="bsd_responsible_id"/>
+                            <field name="bsd_manager_id"/>
+                            <field name="state"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Thông tin chi tiết">
+                            <group>
+                                <group>
+                                    <field name="bsd_built_up_area"/>
+                                    <field name="bsd_carpet_area"/>
+                                    <field name="bsd_management_fee"/>
+                                    <field name="bsd_furnished"/>
+                                    <field name="bsd_bike_parking"/>
+                                    <field name="bsd_car_parking"/>
+                                </group>
+                                <group>
+                                    <field name="bsd_bedroom"/>
+                                    <field name="bsd_bathroom"/>
+                                    <field name="bsd_kitchen"/>
+                                    <field name="bsd_living_room"/>
+                                    <field name="bsd_balconies"/>
+                                    <field name="bsd_balcony"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_unit_tree">
+        <field name="name">bsd.unit.tree</field>
+        <field name="model">bsd.unit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="complete_name"/>
+                <field name="bsd_type"/>
+                <field name="bsd_floor_id"/>
+                <field name="bsd_block_id"/>
+                <field name="bsd_responsible_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_unit_kanban">
+        <field name="name">bsd.unit.kanban</field>
+        <field name="model">bsd.unit</field>
+        <field name="arch" type="xml">
+            <kanban group_create="false" group_delete="false">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="complete_name"/>
+                <field name="bsd_categ_id"/>
+                <field name="bsd_responsible_id"/>
+                <field name="bsd_block_id"/>
+                <field name="color"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_semantic_html_override
+                                           oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}">
+                            <div class="oe_dropdown_kanban">
+                                <div class="oe_dropdown_toggle">
+                                    <i class="fa fa-bars fa-lg" title="Manage" aria-label="Manage"/>
+                                    <ul class="oe_dropdown_menu">
+                                        <li>
+                                            <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                            <div class="o_kanban_image">
+                                <img t-att-src="kanban_image('bsd.unit', 'image_128', record.id.raw_value)" alt="Unit" class="o_image_64_contain"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="complete_name"/>
+                                </strong>
+                                <div>Tòa nhà: <field name="bsd_block_id"/></div>
+                                <div>Chủ Hộ: <field name="bsd_responsible_id"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_unit_action">
+        <field name="name">Unit</field>
+        <field name="res_model">bsd.unit</field>
+        <field name="view_mode">tree,kanban,pivot,form</field>
+        <field name="help" type="xml">
+            <p class="o_view_nocontent_smiling_face">Tạo căn hộ mới</p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_room_type_action">
+        <field name="name">Danh mục phòng</field>
+        <field name="res_model">bsd.room.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="xml">
+            <p>Tạo mới room type</p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_unit_type_action">
+        <field name="name">Danh mục căn hộ</field>
+        <field name="res_model">bsd.unit.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="xml">
+            <p>Tạo mới unit type</p>
+        </field>
+    </record>
+</odoo>

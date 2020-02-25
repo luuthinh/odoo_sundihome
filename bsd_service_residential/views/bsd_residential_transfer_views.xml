@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_residential_transfer_form">
+        <field name="name">bsd.residential.transfer.form</field>
+        <field name="model">bsd.residential.transfer</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Gửi"
+                            states="draft"
+                            type="object"
+                            name="action_send"
+                            class="oe_highlight"/>
+                    <button string="Phê duyệt"
+                            states="send"
+                            type="object"
+                            name="action_confirm"
+                            class="oe_highlight"/>
+                    <button string="Từ chối"
+                            states="send"
+                            type="object"
+                            name="action_refuse"
+                            class="oe_highlight"/>
+                    <button string="Hủy"
+                            type="object"
+                            name="action_cancel"
+                            class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,send,confirm,refuse,cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="bsd_type"/>
+                            <field name="bsd_from_date"/>
+                            <field name="bsd_to_date"/>
+                        </group>
+                        <group>
+                            <field name="bsd_registry_date"/>
+                            <field name="bsd_partner_id"
+                                   domain="[('bsd_is_master','=',True)]"
+                                   options="{'no_create': True}"/>
+                            <field name="bsd_unit_id" options="{'no_create': True}"
+                                   domain="[('bsd_responsible_id','in',[bsd_partner_id]),('bsd_responsible_id','!=',False)]"/>
+                            <field name="bsd_elevator"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Bảng kê tài sản">
+                            <field name="bsd_item_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="bsd_count"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_residential_transfer_tree">
+        <field name="name">bsd.residential.transfer.tree</field>
+        <field name="model">bsd.residential.transfer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bsd_type"/>
+                <field name="bsd_registry_date"/>
+                <field name="bsd_partner_id"/>
+                <field name="bsd_unit_id"/>
+                <field name="bsd_from_date"/>
+                <field name="bsd_to_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="bsd_residential_transfer_gantt">
+            <field name="name">bsd.residential.transfer.gantt</field>
+            <field name="model">bsd.residential.transfer</field>
+            <field name="arch" type="xml">
+                <gantt string="Đăng ký chuyển đồ"
+                       date_start="bsd_from_date"
+                       date_stop="bsd_to_date"
+                       color="bsd_partner_id"
+                       decoration-warning="state == 'draft'"
+                       decoration-info="state == 'send'"
+                       decoration-secondary ="state == 'refuse'"
+                       decoration-success="state == 'confirm'"
+                       decoration-danger="state == 'cancel'"
+                       default_group_by='bsd_unit_id'>
+                    <field name="state"/>
+                    <field name="bsd_partner_id"/>
+                    <field name="bsd_from_date"/>
+                    <field name="bsd_to_date"/>
+                    <field name="bsd_unit_id"/>
+                </gantt>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="bsd_residential_transfer_action">
+        <field name="name">Đăng ký chuyển đồ</field>
+        <field name="res_model">bsd.residential.transfer</field>
+        <field name="view_mode">tree,gantt,form</field>
+        <field name="help" type="xml">
+            <p>Đăng ký chuyển đồ</p>
+        </field>
+    </record>
+</odoo>

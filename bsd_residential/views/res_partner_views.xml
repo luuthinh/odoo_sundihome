@@ -6,47 +6,56 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='vat']" position="after">
-                <field name="bsd_birthday"/>
-                <field name="bsd_cmnd"/>
                 <field name="bsd_is_master"/>
-                <field name="bsd_temp_address"/>
+                <field name="bsd_is_residential"/>
+                <field name="bsd_is_tenant_off"/>
+                <field name="bsd_is_tenant_mall"/>
+                <field name="bsd_is_owner"/>
             </xpath>
             <xpath expr="//notebook" position="inside">
                 <page string="Thông tin chủ hộ">
                     <!--<field name="bsd_type" 	widget="many2many_tags"/>-->
                     <div>
                         <label for="bsd_master_ids"/>
-                        <field name="bsd_master_ids" context="{'form_view_ref' : 'bsd_real_estate.bsd_account_asset_form', 'tree_view_ref' : 'bsd_real_estate.bsd_account_asset_tree'}"/>
+                        <field name="bsd_master_ids"/>
                     </div>
                     <div>
-                        <label for="bsd_owned_ids"/>
-                        <field name="bsd_owned_ids" context="{'form_view_ref' : 'bsd_real_estate.bsd_account_asset_form', 'tree_view_ref' : 'bsd_real_estate.bsd_account_asset_tree'}"/>
+                        <label for="bsd_owner_ids"/>
+                        <field name="bsd_owner_ids"/>
+                    </div>
+
+                    <div>
+                        <label for="bsd_tenant_ids"/>
+                        <field name="bsd_tenant_ids"/>
                     </div>
                     <!--<div>-->
-                        <!--<label for="bsd_rental_ids"/>-->
-                        <!--<field name="bsd_rental_ids">-->
-                            <!--<tree>-->
-                                <!--<field name="bsd_unit_id"/>-->
-                                <!--<field name="bsd_project_id"/>-->
-                                <!--<field name="bsd_block_id"/>-->
-                                <!--<field name="bsd_floor_id"/>-->
-                                <!--<field name="bsd_contract"/>-->
-                                <!--<field name="bsd_from_date"/>-->
-                                <!--<field name="bsd_to_date"/>-->
-                            <!--</tree>-->
-                        <!--</field>-->
+                        <!--<label for="bsd_residential_ids"/>-->
+                        <!--<field name="bsd_residential_ids"/>-->
                     <!--</div>-->
-
                 </page>
             </xpath>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="bsd_res_partner_select">
+        <field name="name">bsd.res.partner.select</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="filter[@name='type_company']" position="after">
+                <filter string="Chủ sở hữu" name="filter_owner" domain="[('bsd_is_owner', '=', True)]"/>
+                <filter string="Chủ hộ" name="filter_master" domain="[('bsd_is_master', '=', True)]"/>
+                <filter string="Cư dân" name="filter_residential" domain="[('bsd_is_residential', '=', True)]"/>
+                <filter string="Khách thuê văn phòng" name="filter_tenant_off" domain="[('bsd_is_tenant_off', '=', True)]"/>
+                <filter string="Khách thuê TTTM" name="filter_tenant_mall" domain="[('bsd_is_tenant_mall', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
     <record model="ir.actions.act_window" id="bsd_res_partner_action">
-        <field name="name">Cư Dân</field>
+        <field name="name">Chủ Hộ</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="help" type="xml">
-            <p class="o_view_nocontent_smiling_face">Tạo cư dân</p>
-        </field>
+        <field name="domain">[('bsd_is_master', '=', True)]</field>
     </record>
 </odoo>

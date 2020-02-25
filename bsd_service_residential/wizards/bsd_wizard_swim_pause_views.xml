@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_wizard_swim_pause_form_view">
+        <field name="name">bsd.wizard.swim.pause.form</field>
+        <field name="model">bsd.wizard.swim.pause</field>
+        <field name="arch" type="xml">
+            <form string="Đăng ký Gym">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="bsd_residential_swim_id"/>
+                            <field name="bsd_int_month"/>
+                        </group>
+                        <group>
+                            <field name="bsd_from_date"/>
+                            <field name="bsd_to_date"/>
+                        </group>
+                        <field name="bsd_reason"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_create" type="object"
+                            string="Xác nhận" class="oe_highlight"/>
+                    <button special="cancel" string="Hủy bỏ"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_wizard_swim_pause_action">
+        <field name="name">Bảo lưu </field>
+        <field name="res_model">bsd.wizard.swim.pause</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

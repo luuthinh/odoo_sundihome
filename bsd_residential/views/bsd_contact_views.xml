@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="bsd_vendor_action_contacts" model="ir.actions.act_window">
+        <field name="name">Nhà cung cấp</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': True, 'search_default_filter_vendor': True}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a contact in your address book
+          </p><p>
+            Odoo helps you to easily track all activities related to a customer.
+          </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_portal_action">
+        <field name="name">Tiềm năng</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': True}</field>
+        <field name="domain">[('bsd_is_master','=',False),
+            ('bsd_is_residential','=',False),
+            ('bsd_is_owner','=',False),
+            ('bsd_is_tenant_off','=',False),
+            ('bsd_is_tenant_mall','=',False)]
+        </field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a contact in your address book
+          </p><p>
+            Odoo helps you to easily track all activities related to a customer.
+          </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_tenant_off_action">
+        <field name="name">Kh thuê văn phòng</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': True, 'search_default_filter_tenant_off': True}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a contact in your address book
+          </p><p>
+            Odoo helps you to easily track all activities related to a customer.
+          </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_tenant_mall_action">
+        <field name="name">Kh thuê tttm</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': True, 'search_default_filter_tenant_mall': True}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a contact in your address book
+          </p><p>
+            Odoo helps you to easily track all activities related to a customer.
+          </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_owner_action">
+        <field name="name">Chủ sở hữu</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': True, 'search_default_filter_owner': True}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a contact in your address book
+          </p><p>
+            Odoo helps you to easily track all activities related to a customer.
+          </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_master_action">
+        <field name="name">Chủ hộ</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': True, 'search_default_filter_master': True}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a contact in your address book
+          </p><p>
+            Odoo helps you to easily track all activities related to a customer.
+          </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_residential_action">
+        <field name="name">Cư dân</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': True, 'search_default_filter_residential': True}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a contact in your address book
+          </p><p>
+            Odoo helps you to easily track all activities related to a customer.
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="contacts.res_partner_menu_contacts"
+              name="Nhà cung cấp"
+              action="bsd_vendor_action_contacts"
+              parent="contacts.menu_contacts"
+              sequence="1"/>
+    <menuitem id="customer_menu_contacts"
+              name="Khách hàng"
+              parent="contacts.menu_contacts"
+              sequence="2"/>
+
+    <menuitem id="portal_menu_action"
+              name="Tiềm năng"
+              parent="customer_menu_contacts"
+              action="bsd_portal_action"/>
+
+    <menuitem id="tenant_off_menu_action"
+              name="Thuê văn phòng"
+              parent="customer_menu_contacts"
+              action="bsd_tenant_off_action"/>
+
+    <menuitem id="tenant_mall_menu_action"
+              name="Thuê TTTM"
+              parent="customer_menu_contacts"
+              action="bsd_tenant_mall_action"/>
+
+    <menuitem id="owner_menu_action"
+              name="Chủ sở hữu"
+              parent="customer_menu_contacts"
+              action="bsd_owner_action"/>
+
+    <menuitem id="master_menu_action"
+              name="Chủ hộ"
+              parent="customer_menu_contacts"
+              action="bsd_master_action"/>
+
+    <menuitem id="residential_menu_action"
+              name="Cư dân"
+              parent="customer_menu_contacts"
+              action="bsd_residential_action"/>
+
+    <menuitem id="contacts.res_partner_menu_config"
+              name="Configuration"
+              parent="contacts.menu_contacts"
+              groups="base.group_system"
+              sequence="3"/>
+
+</odoo>

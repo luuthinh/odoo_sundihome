@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_stock_production_lot_form">
+        <field name="name">bsd.stock.production.lot.form</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="quant_ids" invisible="1"/>
+                <field name="bsd_location_id"/>
+                <field name="bsd_room_type_id"/>
+                <field name="bsd_in_block"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_stock_production_lot_tree">
+        <field name="name">bsd.stock.production.lot.tree</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="bsd_room_type_id"/>
+                <field name="bsd_in_block"/>
+                <field name="bsd_area_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_stock_production_lot_in_unit_action">
+        <field name="name">Thiết bị nội thất</field>
+        <field name="res_model">stock.production.lot</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('bsd_in_block','=',False)]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_stock_production_lot_in_block_action">
+        <field name="name">Thiết bị tòa nhà</field>
+        <field name="res_model">stock.production.lot</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('bsd_in_block','=',False)]</field>
+    </record>
+</odoo>

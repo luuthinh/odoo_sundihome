@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_registry_card_form">
+        <field name="name">bsd.registry.card.form</field>
+        <field name="model">bsd.registry.card</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Gửi đi"
+                            type="object"
+                            states="draft"
+                            name="action_send"
+                            class="oe_highlight"/>
+                    <button string="Phê duyệt"
+                            type="object"
+                            states="waiting"
+                            class="oe_highlight"
+                            name="action_confirm"/>
+                    <button string="Cấp thẻ"
+                            name="%(bsd_wizard_create_card_action)d"
+                            type="action"
+                            states="confirm"
+                            class="oe_highlight"/>
+                    <button string="Hủy"
+                            type="object"
+                            name="action_cancel"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting,confirm,card,cancel"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon"
+                            text="Cấp thẻ"
+                            bg_color="bg-success"
+                            attrs="{'invisible': [('state', 'not in', ['card'])]}"
+                            modifiers="{'invisible':[['state','not in',['card']]]}"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="id" invisible="1"/>
+                            <field name="bsd_partner_id"
+                                   domain="[('bsd_is_master','=',True)]"
+                                   options="{'no_create': True}"/>
+                            <field name="bsd_unit_id" options="{'no_create': True}"
+                                   domain="[('bsd_responsible_id','in',[bsd_partner_id]),('bsd_responsible_id','!=',False)]"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="bsd_type_card"/>
+                            <field name="bsd_request"/>
+                        </group>
+                        <group>
+                            <field name="bsd_send_date"/>
+                            <field name="bsd_send_user"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Danh sách đăng ký">
+                            <field name="bsd_line_ids" context="{'default_bsd_unit_id':bsd_unit_id}">
+                                <tree editable="bottom">
+                                    <field name="bsd_residential_id"/>
+                                    <field name="bsd_birthday" />
+                                    <field name="bsd_cmnd"/>
+                                    <field name="bsd_cmnd_date"/>
+                                    <field name="bsd_cmnd_state"/>
+                                    <field name="bsd_unit_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Thông tin xét duyệt">
+                            <group string="Phần xét duyệt">
+                                <group>
+                                    <field name="bsd_free_card"/>
+                                    <field name="bsd_fee_card"/>
+                                </group>
+                                <group>
+                                    <field name="bsd_confirm_date"/>
+                                    <field name="bsd_confirm_user"/>
+                                </group>
+                            </group>
+                            <group string="Phần cấp thẻ">
+                                <group>
+                                    <field name="bsd_cap_card"/>
+                                </group>
+                                <group>
+                                    <field name="bsd_int_cap_card"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_registry_card_tree">
+        <field name="name">bsd.registry.card.tree</field>
+        <field name="model">bsd.registry.card</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="bsd_partner_id"/>
+                <field name="bsd_unit_id"/>
+                <field name="bsd_send_date"/>
+                <field name="bsd_send_user"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_registry_card_action">
+        <field name="name">Đăng ký thẻ cư dân</field>
+        <field name="res_model">bsd.registry.card</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="xml">
+            <p>Tạo Mẫu đăng ký thẻ cư dân</p>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_residential_card_form">
+        <field name="name">bsd.residential.card.form</field>
+        <field name="model">bsd.residential.card</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="state"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_residential_card_tree">
+        <field name="name">bsd.residential.card.tree</field>
+        <field name="model">bsd.residential.card</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_residential_card_action">
+        <field name="name">Thẻ cư dân</field>
+        <field name="res_model">bsd.residential.card</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="xml">
+            <p>Thẻ cư dân</p>
+        </field>
+    </record>
+</odoo>

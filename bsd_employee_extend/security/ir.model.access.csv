@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bsd_employee_payroll_user,Model bsd_employee_payroll user,model_bsd_employee_payroll,hr.group_hr_user,1,1,1,1
+access_bsd_employee_payroll_manager,Model bsd_employee_payroll manager,model_bsd_employee_payroll,hr.group_hr_manager,1,1,1,1
+
+access_bsd_employee_payroll_item_user,Model bsd_employee_payroll_item user,model_bsd_employee_payroll_item,hr.group_hr_user,1,1,1,1
+access_bsd_employee_payroll_item_manager,Model bsd_employee_payroll_item manager,model_bsd_employee_payroll_item,hr.group_hr_manager,1,1,1,1

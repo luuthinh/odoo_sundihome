@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_residential_swim_form">
+        <field name="name">bsd.residential.swim.form</field>
+        <field name="model">bsd.residential.swim</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Cấp mã"
+                            type="object"
+                            states="draft"
+                            name="action_card"
+                            class="oe_highlight"/>
+                    <button string="Gia hạn"
+                            states="active,deactivate"
+                            type="object"
+                            name="action_add"
+                            class="oe_highlight"/>
+                    <button string="Bảo lưu"
+                            type="object"
+                            states="active"
+                            name="action_pause"/>
+                    <button string="Tập lại"
+                            type="object"
+                            states="pause"
+                            name="action_run"
+                            class="oe_highlight"/>
+                    <button string="Đóng"
+                            type="object"
+                            states="active"
+                            name="action_done"/>
+                    <button string="Hủy"
+                            attrs="{'invisible':[('state', 'in',['cancel'])]}"
+                            type="object"
+                            name="action_cancel"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,deactivate,cancel"/>
+                </header>
+                <sheet>
+					<div class="oe_button_box" name="button_box">
+                        <button name="view_sale_order"
+                                type="object"
+                                icon="fa-dollar"
+                                class="oe_inline oe_stat_button">
+                            <field name="bsd_count_so" widget="statinfo" string="Đơn bán"/>
+                        </button>
+                    </div>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="bsd_sequence"></label>
+                            <h3>
+                                <field name="bsd_sequence" readonly="1"/>
+                            </h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="bsd_residential_id"/>
+                            <field name="bsd_partner_id" invisible="1"/>
+                            <field name="name"/>
+                            <label for="bsd_gender"/>
+                            <div class="d-flex">
+                                <field name="bsd_gender" />
+                                <span class="o_form_label mx-3"> <strong>Ngày sinh</strong></span>
+                                <field name="bsd_birthday"/>
+                            </div>
+                            <field name="bsd_unit_id"/>
+                            <field name="bsd_mobile"/>
+                            <field name="bsd_email"/>
+                        </group>
+                        <group>
+                            <field name="bsd_product_id"/>
+                            <field name="bsd_registry_date"/>
+                            <field name="bsd_user_id"/>
+                            <field name="bsd_note"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="QR code">
+                            <group>
+                                <field name="bsd_qr_code" widget="image"/>
+                            </group>
+                        </page>
+                        <page string="Thời gian đăng ký">
+                            <field name="bsd_line_ids">
+                                <tree editable="top">
+                                    <field name="name"/>
+                                    <field name="bsd_from_date"/>
+                                    <field name="bsd_to_date"/>
+                                    <field name="bsd_so_id"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Bảo lưu">
+                            <field name="bsd_residential_swim_pause_ids">
+                                <tree>
+                                    <field name="bsd_reason"/>
+                                    <field name="bsd_from_date"/>
+                                    <field name="bsd_to_date"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_residential_swim_tree">
+        <field name="name">bsd.residential.swim.tree</field>
+        <field name="model">bsd.residential.swim</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bsd_sequence"/>
+                <field name="name"/>
+                <field name="bsd_gender"/>
+                <field name="bsd_birthday"/>
+                <field name="bsd_unit_id"/>
+                <field name="bsd_mobile"/>
+                <field name="bsd_email"/>
+                <field name="bsd_registry_date"/>
+                <field name="bsd_product_id"/>
+                <field name="bsd_user_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_residential_swim_action">
+        <field name="name">Đăng ký bơi</field>
+        <field name="res_model">bsd.residential.swim</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_residential_swim_pause_calendar">
+        <field name="name">bsd.residential.swim.pause.calendar</field>
+        <field name="model">bsd.residential.swim.pause</field>
+        <field name="arch" type="xml">
+            <calendar string="Lịch bảo lưu" date_start="bsd_to_date"
+                      mode="month"
+                      color="bsd_residential_swim_id">
+                <field name="bsd_residential_swim_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_residential_swim_pause_action">
+        <field name="name">Lịch bảo lưu</field>
+        <field name="res_model">bsd.residential.swim.pause</field>
+        <field name="view_mode">calendar</field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_sale_order_form_swim_inherit">
+        <field name="name">bsd.sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="create_swim_card"
+                        type="object"
+                        states="sale"
+                        class="oe_stat_button"
+                        icon="fa-pencil">
+                    <field name="bsd_count_swim" widget="statinfo" string="Thẻ hồ bơi"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

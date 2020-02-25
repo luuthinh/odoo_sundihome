@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_wizard_create_swim_form_view">
+        <field name="name">bsd.wizard.create.swim.form</field>
+        <field name="model">bsd.wizard.create.swim</field>
+        <field name="arch" type="xml">
+            <form string="Đăng ký Bơi">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="bsd_so_id" readonly="1"/>
+                            <field name="bsd_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="bsd_residential_id" attrs="{'invisible':[('bsd_type', '=','add')]}"/>
+                            <field name="bsd_residential_swim_id" attrs="{'invisible':[('bsd_type', '=','new')]}"/>
+                        </group>
+                        <group>
+                            <label for="bsd_int_month"/>
+                            <div class="d-flex">
+                                <field name="bsd_int_month" />
+                                <span class="o_form_label mx-3 oe_edit_only"> <strong>Tháng</strong></span>
+                            </div>
+                            <field name="bsd_from_date"/>
+                            <field name="bsd_to_date"/>
+                            <field name="bsd_product_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_create" type="object"
+                            string="Xác nhận" class="oe_highlight"/>
+                    <button special="cancel" string="Hủy bỏ"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_wizard_create_swim_action">
+        <field name="name">Tạo mới hoặc gia hạn bơi</field>
+        <field name="res_model">bsd.wizard.create.swim</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

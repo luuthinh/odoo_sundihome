@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Top menu-->
+    <menuitem id="bsd_main_block_root" name="Tòa nhà"/>
+
+    <!--tòa nhà menu-->
+    <menuitem id="bsd_block_menu"
+              name="Tòa nhà"
+              sequence="10"
+              parent="bsd_main_block_root"
+    />
+    <menuitem id="bsd_block_submenu"
+              name="Tòa nhà"
+              sequence="10"
+              parent="bsd_block_menu"
+              action="bsd_block_action"
+    />
+    <menuitem id="bsd_floor_submenu"
+              name="Tầng lầu"
+              sequence="11"
+              action="bsd_floor_action"
+              parent="bsd_block_menu"/>
+
+    <menuitem id="bsd_unit_menu"
+              name="Unit"
+              sequence="12"
+              action="bsd_unit_action"
+              parent="bsd_main_block_root"/>
+
+    <menuitem id="bsd_product_menu"
+              sequence="13"
+              name="Thiết bị"
+              parent="bsd_main_block_root"/>
+
+    <menuitem id="bsd_product_in_unit_submenu"
+              name="Thiết bị nội thất"
+              parent="bsd_product_menu"
+              action="bsd_stock_production_lot_in_unit_action"/>
+
+    <menuitem id="bsd_product_in_block_submenu"
+              name="Thiết bị tòa nhà"
+              parent="bsd_product_menu"
+              action="bsd_stock_production_lot_in_block_action"/>
+
+    <menuitem id="bsd_config_menu"
+              name="Cài đặt"
+              sequence="40"
+              parent="bsd_main_block_root"/>
+
+    <menuitem id="bsd_type_menu"
+              name="Phân loại"
+              parent="bsd_config_menu"/>
+
+    <menuitem id="bsd_project_menu_action"
+              name="Dự án"
+              action="bsd_project_action"
+              parent="bsd_type_menu"/>
+
+    <menuitem id="bsd_block_type_menu"
+              name="Tòa nhà"
+              action="bsd_block_type_action"
+              parent="bsd_type_menu"/>
+
+    <menuitem id="bsd_floor_type_menu"
+              name="Tầng lầu"
+              action="bsd_floor_type_action"
+              parent="bsd_type_menu"/>
+
+    <menuitem id="bsd_unit_type_menu"
+              name="Unit"
+              action="bsd_unit_type_action"
+              parent="bsd_type_menu"/>
+
+    <menuitem id="bsd_room_type_menu"
+              name="Phòng ốc"
+              action="bsd_room_type_action"
+              parent="bsd_type_menu"/>
+
+    <menuitem id="bsd_amenities_menu"
+              name="Danh mục tiện ích"
+              action="bsd_amenities_action"
+              parent="bsd_type_menu"/>
+
+    <menuitem id="bsd_area_menu"
+              name="Khu vực"
+              action="bsd_area_action"
+              parent="bsd_type_menu"/>
+
+
+    <record id="bsd_block.bsd_main_block_root" model="ir.ui.menu">
+        <field name="action" eval="False"/>
+        <field name="active" eval="True"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="name">Tòa nhà</field>
+        <field name="parent_id" eval="False"/>
+        <field name="sequence">10</field>
+        <field name="web_icon">fa fa-building-o,#FFFFFF,#04B45F</field>
+    </record>
+</odoo>

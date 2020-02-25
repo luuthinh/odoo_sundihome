@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Top menu-->
+    <menuitem id="bsd_main_contract_root" name="Hợp đồng"/>
+
+    <!--hợp đồng thuê căn hộ menu-->
+    <menuitem id="bsd_residential_menu"
+              name="Thuê căn hộ"
+              sequence="1"
+              parent="bsd_main_contract_root"/>
+    <menuitem id="bsd_tenant_residential_action"
+              name="Danh sách khách thuê căn hộ"
+              sequence="5"
+              action="bsd_partner_tenant_res_action"
+              parent="bsd_residential_menu"/>
+    <menuitem id="bsd_residential_contract_action"
+              name="Thuê căn hộ"
+              sequence="1"
+              action="bsd_contract_tenancy_residential_action"
+              parent="bsd_residential_menu"/>
+    <menuitem id="bsd_contract_tenancy_schedule_res_menu"
+              name="Lịch thu tiền người thuê căn hộ"
+              sequence="10"
+              action="bsd_contract_tenancy_schedule_res_action"
+              parent="bsd_residential_menu"/>
+
+    <!--Hợp đồng bán-->
+    <menuitem id="bsd_contract_sale_menu"
+              name="Hợp đồng bán"
+              sequence="14"
+              parent="bsd_main_contract_root"/>
+    <menuitem id="bsd_contract_sale_action_menu"
+              name="Danh sách hợp đồng bán"
+              sequence="1"
+              parent="bsd_contract_sale_menu"
+              action="bsd_contract_sale_action"/>
+    <menuitem id="bsd_contract_sale_partner_action"
+              name="Danh sách chủ sở hữu"
+              sequence="1"
+              action="bsd_partner_owner_action"
+              parent="bsd_contract_sale_menu"/>
+
+    <!--Cài đặt-->
+    <menuitem id="bsd_config_menu"
+              name="Cài đặt"
+              sequence="40"
+              parent="bsd_main_contract_root"/>
+    <menuitem id="bsd_rent_menu"
+              name="Chu kỳ thu tiền"
+              action="bsd_rent_type_action"
+              parent="bsd_config_menu"/>
+
+    <record id="bsd_contract.bsd_main_contract_root" model="ir.ui.menu">
+        <field name="action" eval="False"/>
+        <field name="active" eval="True"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="name">Hợp đồng</field>
+        <field name="parent_id" eval="False"/>
+        <field name="sequence">10</field>
+        <field name="web_icon">fa fa-file-text-o,#FFFFFF,#2D5FCD</field>
+    </record>
+</odoo>

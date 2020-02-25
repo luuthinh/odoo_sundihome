@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_residential_vehicle_tree">
+        <field name="name">bsd.residential.vehicle.tree</field>
+        <field name="model">bsd.residential.vehicle</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bsd_brand"/>
+                <field name="bsd_product_id"/>
+                <field name="bsd_license"/>
+                <field name="bsd_residential_id"/>
+                <field name="bsd_unit_id"/>
+                <field name="bsd_card"/>
+                <field name="bsd_date_accuracy"/>
+                <field name="bsd_note"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_residential_vehicle_form">
+        <field name="name">bsd.residential.vehicle.form</field>
+        <field name="model">bsd.residential.vehicle</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Gửi"
+                            type="object"
+                            states="draft"
+                            name="action_send"
+                            class="oe_highlight"/>
+                    <button string="Cấp thẻ"
+                            type="object"
+                            states="send"
+                            name="action_card"
+                            class="oe_highlight"/>
+                    <button string="Hủy"
+                            type="object"
+                            states="send,card"
+                            name="action_cancel"
+                            class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,send,card,cancel"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon"
+                                text="Đã cấp thẻ"
+                                bg_color="bg-success"
+                                attrs="{'invisible': [('state', 'not in', ['card'])]}"
+                                modifiers="{'invisible':[['state','not in',['card']]]}"/>
+                    <widget name="web_ribbon"
+                                text="Hủy thẻ"
+                                bg_color="bg-danger"
+                                attrs="{'invisible': [('state', 'not in', ['cancel'])]}"
+                                modifiers="{'invisible':[['state','not in',['cancel']]]}"/>
+                    <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="bsd_partner_id"
+                                   domain="[('bsd_is_master','=',True)]"
+                                   options="{'no_create': True}"/>
+                            <field name="bsd_unit_id" domain="[('bsd_responsible_id','in',[bsd_partner_id])]"/>
+                            <field name="bsd_product_id"/>
+                            <field name="bsd_brand"/>
+                        </group>
+                        <group>
+                            <field name="bsd_residential_id"
+                                   domain="[('state','=','in'),('bsd_unit_id.id','=',bsd_unit_id)]"/>
+                            <field name="bsd_license"/>
+                            <field name="bsd_note"/>
+                            <field name="bsd_card"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_residential_vehicle_filter">
+        <field name="name">bsd.residential.vehicle.select</field>
+        <field name="model">bsd.residential.vehicle</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_residential_vehicle_action">
+        <field name="name">Đăng ký giữ xe</field>
+        <field name="res_model">bsd.residential.vehicle</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="xml">
+            <p>Tạo mới Đăng ký giữ xe</p>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_residential_vehicle_filter_action">
+        <field name="name">Đăng ký giữ xe</field>
+        <field name="res_model">bsd.residential.vehicle</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','in',['card','cancel])]</field>
+    </record>
+</odoo>

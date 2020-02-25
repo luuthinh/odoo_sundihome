@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_employee_payroll_form">
+        <field name="name">bsd.employee.payroll.form</field>
+        <field name="model">bsd.employee.payroll</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Thanh toán"
+                            states="draft"
+                            type="object"
+                            name="action_payment"
+                            class="oe_highlight"/>
+                    <button string="Hủy"
+                            type="object"
+                            name="action_cancel"
+                            class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,payment,cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="bsd_month"/>
+                            <field name="bsd_year"/>
+                            <field name="bsd_pay_total"/>
+                        </group>
+                        <group>
+                            <field name="bsd_user_id"/>
+                            <field name="bsd_user_date"/>
+                            <field name="bsd_pay_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Bảng lương nhân viên">
+                            <field name="bsd_item_ids" context="{'default_bsd_month':bsd_month, 'default_bsd_year':bsd_year, 'default_bsd_user_id':bsd_user_id, 'default_bsd_user_date':bsd_user_date, 'default_bsd_pay_date':bsd_pay_date}">
+                                <tree editable="bottom">
+                                    <field name="bsd_employee_id"/>
+                                    <field name="bsd_barcode"/>
+                                    <field name="bsd_department_id"/>
+                                    <field name="bsd_job_id"/>
+                                    <field name="bsd_salary"/>
+                                    <field name="currency_id" invisible="1"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <field name="bsd_month"/>
+                                            <field name="bsd_year"/>
+                                            <field name="bsd_employee_id"/>
+                                            <field name="bsd_barcode"/>
+                                            <field name="bsd_department_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="bsd_job_id"/>
+                                            <field name="bsd_salary"/>
+                                            <field name="bsd_user_id"/>
+                                            <field name="bsd_user_date"/>
+                                            <field name="bsd_pay_date"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Thanh toán">
+                            <group>
+                                <group>
+                                    <field name="bsd_payment_date"/>
+                                </group>
+                                <group>
+                                    <field name="bsd_payment_id"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bsd_employee_payroll_tree">
+        <field name="name">bsd.employee.payroll.tree</field>
+        <field name="model">bsd.employee.payroll</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bsd_month"/>
+                <field name="bsd_year"/>
+                <field name="name"/>
+                <field name="bsd_pay_total"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_employee_payroll_action">
+        <field name="name">Bảng lương</field>
+        <field name="res_model">bsd.employee.payroll</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="xml">
+            <p>Nhập mới bảng lương</p>
+        </field>
+    </record>
+
+    <menuitem id="bsd_employee_payroll_menu_action"
+              parent="hr.menu_hr_root"
+              action="bsd_employee_payroll_action"
+              sequence="5"
+              name="Bảng lương"/>
+</odoo>

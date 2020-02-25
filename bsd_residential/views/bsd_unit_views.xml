@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="bsd_unit_form">
+        <field name="name">bsd.unit.form</field>
+        <field name="model">bsd.unit</field>
+        <field name="inherit_id" ref="bsd_block.bsd_unit_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <!--<button name="view_history_residential"-->
+                        <!--string="Lịch sử cư dân"-->
+                        <!--type="object"-->
+                        <!--icon = 'fa-archive'-->
+                        <!--class="oe_stat_button">-->
+                <!--</button>-->
+                <!--<button name="view_history_responsible"-->
+                        <!--string="Lịch sử chủ hộ"-->
+                        <!--type="object"-->
+                        <!--icon = 'fa-archive'-->
+                        <!--class="oe_stat_button">-->
+                <!--</button>-->
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                        <page string="Cư dân">
+                            <field name="bsd_residential_history_ids" mode="tree,kanban"
+                                   context="{'default_bsd_unit_id':id}">
+                                <tree>
+                                    <field name="bsd_residential_id"/>
+                                    <field name="bsd_relationship_id"/>
+                                    <field name="bsd_date_move_on"/>
+                                    <field name="bsd_date_move_out"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="bsd_unit_tree">
+        <field name="name">bsd.unit.tree.inherit</field>
+        <field name="model">bsd.unit</field>
+        <field name="inherit_id" ref="bsd_block.bsd_unit_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bsd_responsible_id']" position="after">
+                <field name="bsd_count_residential"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_unit_res_action">
+        <field name="name">Căn hộ</field>
+        <field name="res_model">bsd.unit</field>
+        <field name="view_mode">kanban,tree,pivot,form</field>
+        <field name="domain">[('bsd_type','=','res')]</field>
+    </record>
+    <record model="ir.actions.act_window" id="bsd_unit_off_action">
+        <field name="name">Căn hộ</field>
+        <field name="res_model">bsd.unit</field>
+        <field name="view_mode">kanban,tree,pivot,form</field>
+        <field name="domain">[('bsd_type','=','off')]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bsd_unit_mall_action">
+        <field name="name">Căn hộ</field>
+        <field name="res_model">bsd.unit</field>
+        <field name="view_mode">kanban,tree,pivot,form</field>
+        <field name="domain">[('bsd_type','=','mall')]</field>
+    </record>
+</odoo>

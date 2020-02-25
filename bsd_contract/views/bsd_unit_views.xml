@@ -1,0 +1,35 @@
+<odoo>
+    <record model="ir.ui.view" id="bsd_unit_form">
+        <field name="name">bsd.unit.form.inherit</field>
+        <field name="model">bsd.unit</field>
+        <field name="inherit_id" ref="bsd_block.bsd_unit_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bsd_owner_id']" position="after">
+                <field name="bsd_tenant_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Lịch sử căn hộ">
+                    <field name="bsd_contract_tenancy_ids">
+                        <tree>
+                            <field name="name" string="Hợp đồng thuê"/>
+                            <field name="bsd_tenant_id" string="Ngày hiệu lực"/>
+                            <field name="bsd_rent_date"/>
+                            <field name="bsd_start_date"/>
+                            <field name="bsd_expiration_date"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                    <field name="bsd_contract_sale_ids">
+                        <tree>
+                            <field name="name" string="Hợp đồng bán"/>
+                            <field name="bsd_person_buy_id"/>
+                            <field name="bsd_start_date"/>
+                            <field name="bsd_start_date"/>
+                        </tree>
+                    </field>
+
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

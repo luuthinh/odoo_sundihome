@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="check_swim">
+        <div class="align-middle">
+            <h1>Số thứ tự: <span><t t-esc="sequence"/> </span></h1>
+            <h2>Hội viên: <span><t t-esc="name"></t></span></h2>
+            <h5>Giới tính: <span><t t-esc="gender"></t></span></h5>
+            <h5>Ngày sinh:<span><t t-esc="birthday"/></span></h5>
+            <h5>Số điện thoại: <span><t t-esc="mobile"/></span></h5>
+            <h5>Trạng thái: <span><t t-esc="state"/></span></h5>
+            <h1>Dịch vụ: <span><t t-esc="product_id"/></span></h1>
+            <t t-if="image">
+            <img t-att-src="image_data_uri(image)"/>
+            </t>
+        </div>
+    </template>
+
+    <template id="check_gym">
+        <div class="align-middle">
+            <h1>Số thứ tự: <span><t t-esc="sequence"/> </span></h1>
+            <h2>Hội viên: <span><t t-esc="name"></t></span></h2>
+            <h5>Giới tính: <span><t t-esc="gender"></t></span></h5>
+            <h5>Ngày sinh:<span><t t-esc="birthday"/></span></h5>
+            <h5>Số điện thoại: <span><t t-esc="mobile"/></span></h5>
+            <h5>Trạng thái: <span><t t-esc="state"/></span></h5>
+            <h1>Dịch vụ: <span><t t-esc="product_id"/></span></h1>
+            <t t-if="image">
+            <img t-att-src="image_data_uri(image)"/>
+            </t>
+        </div>
+    </template>
+
+    <template id="check_tennis">
+        <div class="align-middle">
+            <h2>Phiếu <span><t t-esc="name"></t></span></h2>
+            <h5>Cư dân: <span><t t-esc="residential_id"/> </span></h5>
+            <h5>Bắt đầu: <span><t t-esc="start_time"/></span></h5>
+            <h5>Kết thúc: <span><t t-esc="end_time"/></span></h5>
+            <h5>Trạng thái: <span><t t-esc="state"/></span></h5>
+            <h1>Dịch vụ: <span><t t-esc="product_id"/></span></h1>
+        </div>
+    </template>
+
+    <template id="check_bbq">
+        <div class="align-middle">
+            <h2>Phiếu <span><t t-esc="name"></t></span></h2>
+            <h5>Cư dân: <span><t t-esc="residential_id"/> </span></h5>
+            <h5>Bắt đầu: <span><t t-esc="start_time"/></span></h5>
+            <h5>Kết thúc: <span><t t-esc="end_time"/></span></h5>
+            <h5>Trạng thái: <span><t t-esc="state"/></span></h5>
+            <h1>Dịch vụ: <span><t t-esc="product_id"/></span></h1>
+        </div>
+    </template>
+</odoo>

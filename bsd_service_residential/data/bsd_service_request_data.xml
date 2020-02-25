@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="seq_bsd_residential_vehicle" model="ir.sequence">
+            <field name="name">Đăng ký giữ xe</field>
+            <field name="code">bsd.residential.vehicle</field>
+            <field name="prefix">DKTX/%(range_year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_bsd_residential_tennis" model="ir.sequence">
+            <field name="name">Đăng ký sân tennis</field>
+            <field name="code">bsd.residential.tennis</field>
+            <field name="prefix">TN/%(range_year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_bsd_residential_transfer" model="ir.sequence">
+            <field name="name">Đăng ký Dọn/Chuyển đồ</field>
+            <field name="code">bsd.residential.transfer</field>
+            <field name="prefix">TRAN/%(range_year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_bsd_residential_bbq" model="ir.sequence">
+            <field name="name">Đăng ký sân BBQ</field>
+            <field name="code">bsd.residential.bbq</field>
+            <field name="prefix">BBQ/%(range_year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_bsd_residential_gym" model="ir.sequence">
+            <field name="name">Số thứ tự hội viên gym</field>
+            <field name="code">bsd.residential.gym</field>
+            <field name="prefix">Gym/%(range_year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_bsd_residential_swim" model="ir.sequence">
+            <field name="name">Số thứ tự hội viên bơi</field>
+            <field name="code">bsd.residential.swim</field>
+            <field name="prefix">Swim/%(range_year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="auto_check_gym" model="ir.cron">
+            <field name="name">Kiểm tra ngày kết thúc của dịch vụ Gym</field>
+            <field name="model_id" ref="model_bsd_residential_gym"/>
+            <field name="state">code</field>
+            <field name="code">model._compute_status()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+    </data>
+</odoo>

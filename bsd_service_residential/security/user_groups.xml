@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.module.category" id="module_bsd_service_residential">
+        <field name="name">Quản lý dịch vụ cư dân</field>
+        <field name="description">User access lever for this module</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="group_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+        <field name="category_id" ref="module_bsd_service_residential"/>
+    </record>
+
+    <record id="group_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="implied_ids" eval="[(4,ref('bsd_service_residential.group_user'))]"/>
+        <field name="category_id" ref="module_bsd_service_residential"/>
+    </record>
+</odoo>

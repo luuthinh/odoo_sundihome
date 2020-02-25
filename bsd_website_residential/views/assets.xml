@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
-    <template id="assets_frontend" inherit_id="web_editor.assets_frontend"
-              name="Residential Assets" priority="15">
-        <xpath expr="//script[last()]" position="after">
-            <script type="text/javascript" src="/bsd_website_residential/static/src/js/residential.js"></script>
-        </xpath>
-    </template>
-</odoo>
