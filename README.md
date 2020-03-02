@@ -1,33 +1,34 @@
-# odoo_sundihome
-Module	Màn hình	STT	Chi tiết yêu cầu
-Danh bạ	Liên hệ	1	Tạo & quản lý khách hàng
-Quản lý tòa nhà	Tòa nhà	2	Khai báo tòa nhà
-	Tầng	3	Khai báo tầng
-	Unit	4	Khai báo Unit
-Quản lý cư dân	Đăng ký dân cư	1	Đăng kí chủ hộ dân cư 
-	Đăng ký dân cư	2	Đăng kí thành viên hộ gia đình
-Hợp đồng	Hợp đồng bán	1	Tạo & quản lý hợp đồng bán
-	HĐ cho thuê căn hộ	2	Tạo & quản lý hợp đồng thuê căn hộ
-Dịch vụ	Dịch vụ phát hành thẻ	1	Đăng kí gửi xe
-		2	Đăng kí thẻ giữ xe
-		3	Phòng gym (QR Code)
-		4	Hồ bơi (QR Code)
-		5	Đăng kí BBQ (QR Code)
-		6	Sân tennis (QR Code)
-		7	Đăng kí thẻ cư dân & thang máy & ra vào
-	Dịch vụ không phát hành thẻ	1	Điện (thu hộ)
-		2	Nước (thu hộ)
-		4	Đăng kí chuyển/ dọn đồ
-		6	Vệ sinh
-		7	Thiết kế văn phòng
-		8	Xây dựng văn phòng
-	Các khoản phí bắt buộc	1	Phí quản lý chung cư
-		2	Phí dịch vụ chung cư
-		3	Phí vệ sinh
-	Bảng giá dịch vụ	1	Tạo bảng giá theo từng đối tượng khách hàng
-Kế toán thu	Khách hàng		Danh mục khách hàng
-	Hóa đơn	1	Tạo phiếu yêu cầu thanh toán tiền dịch vụ cho căn hộ hằng tháng (bao gồm phí quản lý)
-Nhân sự	Nhân sự	1	Tạo & quản lý nhân viên
-	Phòng ban	2	Tạo & quản lý phòng ban
-	Bảng lương	3	Import bảng lương
-
+# Danh sách tính năng
+### Phân hệ Danh bạ
+	1. Tạo và quản lý khách hàng
+### Phân hệ Tòa nhà
+	2. Khai báo tòa nhà
+	3. Khai báo tầng
+	4. Khai báo unit
+### Phân hệ Cư dân
+	5. Đăng kí chủ hộ dân cư
+	6. Đăng kí thành viên hộ gia đình
+	7. Đăng kí thẻ cư dân
+### Phân hệ hợp đồng
+	8. Theo dõi hợp đồng thuê căn hộ
+	9. Theo dõi hợp đồng bán căn hộ
+### Phân hệ dịch vụ
+	10. Đăng kí giữ xe
+	11. Ghi nhận phí sử dụng điện
+	12. Ghi nhận phí sử dụng nước
+	13. Đăng kí Gym
+	14. Đăng kí hồ bơi
+	15. Đăng kí sân tennis
+	16. Đăng kí BBQ
+### Phân hệ hóa đơn
+###### Kế toán thu
+	17. Xuất hóa đơn đồng loạt theo tòa nhà
+	18. Ghi nhận thanh toán của cư dân
+###### Kế toán chi
+	19. Tạo hóa đơn nhà cung cấp
+	20. Ghi nhận thanh toán cho nhà cung cấp 
+### Phân hệ nhân sự
+	21. Tạo và quản lý nhân viên
+	22. Tạo và quản lý phòng ban
+	23. Nhập bảng lương
+	
