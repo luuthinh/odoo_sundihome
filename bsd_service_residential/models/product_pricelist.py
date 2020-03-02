@@ -2,6 +2,8 @@
 
 from odoo import models, fields, api
 from itertools import chain
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class BsdContractSale(models.Model):
@@ -28,13 +30,11 @@ class ProductPriceList(models.Model):
     def _compute_complete_name(self):
         for each in self:
             if each.bsd_block_id:
-                each.complete_name = '{}-{},{}'.format(
-                                                                   each.bsd_block_id.bsd_code,
-                                                                   each.bsd_type,
-                                                                   each.name)
+                each.complete_name = '{}-{},{}'.format(each.bsd_block_id.bsd_code,
+                                                       each.bsd_type,
+                                                       each.name)
     bsd_block_id = fields.Many2one('bsd.block', string="Tòa nhà", required=True)
-    bsd_type = fields.Selection([('res', 'Căn hộ'), ('off', 'Văn Phòng'), ('mall', 'TTTM')], string="Loại Unit",
-                                default='res')
+    bsd_type = fields.Selection([('res', 'Căn hộ'), ('off', 'Văn Phòng'), ('mall', 'TTTM')], string="Loại Unit")
 
     def check_rule_get_item(self, products_qty_partner, date=False, uom_id=False):
         self.ensure_one()
@@ -66,7 +66,6 @@ class ProductPriceList(models.Model):
         else:
             prod_ids = [product.id for product in products]
             prod_tmpl_ids = [product.product_tmpl_id.id for product in products]
-
         return self._compute_price_rule_get_items(products_qty_partner, date, uom_id, prod_tmpl_ids, prod_ids, categ_ids)
 
     def bsd_get_product_price_rule(self, product, quantity, partner, date=False, uom_id=False):

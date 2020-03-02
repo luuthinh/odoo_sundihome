@@ -3,10 +3,16 @@
     <!--Top menu-->
     <menuitem id="bsd_main_block_root" name="Tòa nhà"/>
 
+    <!--Unit menu-->
+    <menuitem id="bsd_unit_menu"
+              name="Unit"
+              sequence="10"
+              action="bsd_unit_action"
+              parent="bsd_main_block_root"/>
     <!--tòa nhà menu-->
     <menuitem id="bsd_block_menu"
               name="Tòa nhà"
-              sequence="10"
+              sequence="12"
               parent="bsd_main_block_root"
     />
     <menuitem id="bsd_block_submenu"
@@ -21,40 +27,34 @@
               action="bsd_floor_action"
               parent="bsd_block_menu"/>
 
-    <menuitem id="bsd_unit_menu"
-              name="Unit"
-              sequence="12"
-              action="bsd_unit_action"
-              parent="bsd_main_block_root"/>
+    <!--<menuitem id="bsd_product_menu"-->
+              <!--sequence="13"-->
+              <!--name="Thiết bị"-->
+              <!--parent="bsd_main_block_root"/>-->
 
-    <menuitem id="bsd_product_menu"
-              sequence="13"
-              name="Thiết bị"
-              parent="bsd_main_block_root"/>
+    <!--<menuitem id="bsd_product_in_unit_submenu"-->
+              <!--name="Thiết bị nội thất"-->
+              <!--parent="bsd_product_menu"-->
+              <!--action="bsd_stock_production_lot_in_unit_action"/>-->
 
-    <menuitem id="bsd_product_in_unit_submenu"
-              name="Thiết bị nội thất"
-              parent="bsd_product_menu"
-              action="bsd_stock_production_lot_in_unit_action"/>
-
-    <menuitem id="bsd_product_in_block_submenu"
-              name="Thiết bị tòa nhà"
-              parent="bsd_product_menu"
-              action="bsd_stock_production_lot_in_block_action"/>
+    <!--<menuitem id="bsd_product_in_block_submenu"-->
+              <!--name="Thiết bị tòa nhà"-->
+              <!--parent="bsd_product_menu"-->
+              <!--action="bsd_stock_production_lot_in_block_action"/>-->
 
     <menuitem id="bsd_config_menu"
               name="Cài đặt"
               sequence="40"
               parent="bsd_main_block_root"/>
 
-    <menuitem id="bsd_type_menu"
-              name="Phân loại"
-              parent="bsd_config_menu"/>
-
     <menuitem id="bsd_project_menu_action"
               name="Dự án"
               action="bsd_project_action"
-              parent="bsd_type_menu"/>
+              parent="bsd_config_menu"/>
+
+    <menuitem id="bsd_type_menu"
+              name="Phân loại"
+              parent="bsd_config_menu"/>
 
     <menuitem id="bsd_block_type_menu"
               name="Tòa nhà"
@@ -77,7 +77,7 @@
               parent="bsd_type_menu"/>
 
     <menuitem id="bsd_amenities_menu"
-              name="Danh mục tiện ích"
+              name="Tiện ích"
               action="bsd_amenities_action"
               parent="bsd_type_menu"/>
 

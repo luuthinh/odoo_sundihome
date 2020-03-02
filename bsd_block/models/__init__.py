@@ -6,3 +6,4 @@ from . import bsd_unit
 
 from . import product_template
 from . import stock_production_lot
+from . import uom_uom

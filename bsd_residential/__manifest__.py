@@ -24,7 +24,6 @@
         'views/bsd_registry_request_views.xml',
         'views/bsd_registry_card_views.xml',
         'views/menu_item_views.xml',
-        'views/bsd_contact_views.xml',
         'views/sale_order_views.xml',
     ],
     'application': True,

@@ -25,6 +25,7 @@ class BsdProject(models.Model):
 
 class BsdBlockFee(models.Model):
     _name = 'bsd.block.fee'
+    _description = 'Các loại phí tòa nhà'
     _rec_name = 'bsd_type'
 
     bsd_block_id = fields.Many2one('bsd.block', string="Tòa nhà")
@@ -81,6 +82,21 @@ class BsdBlock(models.Model):
         _logger.debug("create")
         _logger.debug(vals_list)
         return super(BsdBlock, self).create(vals_list)
+
+    def action_update_fee(self):
+        units = self.env['bsd.unit'].search([('bsd_block_id', '=', self.id)])
+        res_units = units.filtered(lambda x: x.bsd_type == 'res')
+        res_fee = self.bsd_fee_ids.filtered(lambda x: x.bsd_type == 'res')
+        res_product = set(res_fee.bsd_product_ids.ids)
+        for unit in res_units:
+            list_product = set()
+            if unit.bsd_unit_fee_ids:
+                list_product = set(unit.bsd_unit_fee_ids.mapped('bsd_product_id').ids)
+            product_diffs = res_product.difference(list_product)
+            for product in product_diffs:
+                unit.write({
+                    'bsd_unit_fee_ids': [(0, 0, {'bsd_product_id': product})]
+                })
 
 
 class BsdBlockType(models.Model):

@@ -22,7 +22,6 @@ class BsdUnit(models.Model):
                                 default='res')
     bsd_categ_id = fields.Many2one('bsd.unit.category', string="Phân loại")
 
-    bsd_responsible_id = fields.Many2one('res.partner', string="Chủ hộ")
     bsd_tenant_id = fields.Many2one('res.partner', string="Người thuê")
     bsd_owner_id = fields.Many2one('res.partner', string="Chủ sở hữu")
     bsd_manager_id = fields.Many2one('hr.employee', related='bsd_floor_id.bsd_manager_id', string="Nhân viên quản lý")
@@ -49,6 +48,8 @@ class BsdUnit(models.Model):
     color = fields.Integer()
 
     bsd_location_id = fields.Many2one('stock.location', string="Vị trí", readonly=True)
+
+    bsd_unit_fee_ids = fields.One2many('bsd.unit.fee', 'bsd_unit_id', string="Phí định kỳ")
 
     @api.depends('name', 'bsd_block_id.bsd_code', 'bsd_floor_id.name')
     def _compute_complete_name(self):
@@ -139,8 +140,15 @@ class BsdUnitCategory(models.Model):
                 category.complete_name = category.name
 
 
-class BsdUnitView(models.Model):
-    _name = 'bsd.unit.view'
-    _description = 'View Unit'
+class BsdUnitFee(models.Model):
+    _name = 'bsd.unit.fee'
+    _description = 'Lịch thu phí định kì'
 
-    name = fields.Char(string="View")
+    bsd_unit_id = fields.Many2one('bsd.unit', string="Unit")
+    bsd_product_id = fields.Many2one('product.product', string="Phí")
+    bsd_year = fields.Selection([(str(num), str(num)) for num in range(2020, 2100)],
+                                string='Năm',
+                                default='2020', required=True)
+    bsd_month = fields.Selection([(str(num), str(num)) for num in range(1, 13)],
+                                 string='Tháng',
+                                 default='1', required=True)

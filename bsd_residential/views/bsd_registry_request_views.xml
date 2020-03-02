@@ -56,14 +56,14 @@
                         <group>
                             <field name="id" invisible="1"/>
                             <field name="bsd_method"/>
-                            <field name="bsd_partner_id"
+                            <field name="bsd_residential_id"
                                    attrs="{'invisible':[('bsd_method','=','new_host')],
                                            'required':[('bsd_method','not in',['new_host','renew'])]}"
                                    domain="[('bsd_is_master','=',True)]"
                                    options="{'no_create': True}"/>
                             <field name="bsd_is_multi_unit" attrs="{'invisible':[('bsd_method', 'not in',['new_host','renew'])]}"/>
                             <field name="bsd_unit_id" options="{'no_create': True}"
-                                   domain="[('bsd_responsible_id','in',[bsd_partner_id]),('bsd_responsible_id','!=',False)]"
+                                   domain="[('bsd_responsible_id','in',[bsd_residential_id]),('bsd_responsible_id','!=',False)]"
                                    attrs="{'invisible':[('bsd_is_multi_unit', '=',True)],
                                             'required':[('bsd_is_multi_unit','=',False)]}"/>
                             <field name="bsd_is_address" attrs="{'invisible':[('bsd_method','!=','new_host')]}"/>
@@ -84,6 +84,7 @@
                         <page string="Thông tin đăng ký">
                             <field name="bsd_line_ids" context="{'default_bsd_method':bsd_method}">
                                 <tree editable="bottom">
+                                    <field name="bsd_partner_id"/>
                                     <field name="name"/>
                                     <field name="birthday" />
                                     <field name="gender"/>
@@ -126,7 +127,7 @@
             <tree>
                 <field name="name"/>
                 <field name="bsd_method"/>
-                <field name="bsd_partner_id"/>
+                <field name="bsd_residential_id"/>
                 <field name="bsd_unit_id"/>
                 <field name="bsd_send_date"/>
                 <field name="bsd_send_user"/>

@@ -5,6 +5,7 @@ from odoo import models, fields, api
 
 class BsdContractSale(models.Model):
     _name = 'bsd.contract.sale'
+    _description = "Hợp đồng mua bán"
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string="Hợp đồng")

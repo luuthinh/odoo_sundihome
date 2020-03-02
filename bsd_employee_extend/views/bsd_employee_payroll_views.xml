@@ -41,22 +41,27 @@
                                     <field name="bsd_job_id"/>
                                     <field name="bsd_salary"/>
                                     <field name="currency_id" invisible="1"/>
+                                    <field name="bsd_user_id" invisible="1"/>
+                                    <field name="bsd_user_date" invisible="1"/>
+                                    <field name="bsd_pay_date" invisible="1"/>
                                 </tree>
                                 <form>
                                     <sheet>
                                         <group>
-                                            <field name="bsd_month"/>
-                                            <field name="bsd_year"/>
-                                            <field name="bsd_employee_id"/>
-                                            <field name="bsd_barcode"/>
-                                            <field name="bsd_department_id"/>
-                                        </group>
-                                        <group>
-                                            <field name="bsd_job_id"/>
-                                            <field name="bsd_salary"/>
-                                            <field name="bsd_user_id"/>
-                                            <field name="bsd_user_date"/>
-                                            <field name="bsd_pay_date"/>
+                                            <group>
+                                                <field name="bsd_month"/>
+                                                <field name="bsd_year"/>
+                                                <field name="bsd_employee_id"/>
+                                                <field name="bsd_barcode"/>
+                                                <field name="bsd_department_id"/>
+                                            </group>
+                                            <group>
+                                                <field name="bsd_job_id"/>
+                                                <field name="bsd_salary"/>
+                                                <field name="bsd_user_id"/>
+                                                <field name="bsd_user_date"/>
+                                                <field name="bsd_pay_date"/>
+                                            </group>
                                         </group>
                                     </sheet>
                                 </form>

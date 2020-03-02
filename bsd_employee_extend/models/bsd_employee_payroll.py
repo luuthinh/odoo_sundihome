@@ -67,14 +67,17 @@ class BsdEmployeePayrollItem(models.Model):
     bsd_salary = fields.Monetary(string='Lương')
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
     currency_id = fields.Many2one(related="company_id.currency_id", string="Currency", readonly=True)
-    bsd_user_id = fields.Many2one('hr.employee', string="Người phê duyệt")
-    bsd_user_date = fields.Date(string="Ngày phê duyệt")
-    bsd_pay_date = fields.Date(string="Ngày thanh toán")
     bsd_year = fields.Selection([(str(num), str(num)) for num in range(2020, 2100)],
                                 string='Năm',
                                 default='2020', required=True)
-    bsd_month = fields.Selection([(str(num), str(num)) for num in range(1, 12)],
+    bsd_month = fields.Selection([(str(num), str(num)) for num in range(1, 13)],
                                  string='Tháng',
                                  default='1', required=True)
     bsd_employee_payroll_id = fields.Many2one('bsd.employee.payroll', string='Bảng lương tháng')
-
+    bsd_user_id = fields.Many2one('hr.employee', string="Người phê duyệt",
+                                  related='bsd_employee_payroll_id.bsd_user_id',
+                                  store=True)
+    bsd_user_date = fields.Date(string="Ngày phê duyệt", related='bsd_employee_payroll_id.bsd_user_date',
+                                store=True)
+    bsd_pay_date = fields.Date(string="Ngày thanh toán", related='bsd_employee_payroll_id.bsd_pay_date',
+                               store=True)

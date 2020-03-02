@@ -23,7 +23,7 @@
                             <h5>Căn hộ: <span t-field="doc.bsd_unit_id"/></h5>
                         </div>
                         <div class="col-4">
-                            <h5>Chủ hộ: <span t-field="doc.bsd_unit_id.bsd_responsible_id"/></h5>
+                            <h5>Chủ hộ: <span t-field="doc.partner_id"/></h5>
                         </div>
                     </div>
                     <hr/>
@@ -32,25 +32,25 @@
                                style="table-layout:fixed;">
                             <thead>
                                 <tr>
-                                    <th width="10px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                    <th width="20px" style="border: 1px; border-style: solid; border-color:#fff;">
                                         STT
                                     </th>
-                                    <th width="30px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                    <th width="50px" style="border: 1px; border-style: solid; border-color:#fff;">
                                         Nội dung thu
                                     </th>
-                                    <th width="10px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                    <th width="20px" style="border: 1px; border-style: solid; border-color:#fff;">
                                         ĐVT
                                     </th>
-                                    <th width="10px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                    <th width="30px" style="border: 1px; border-style: solid; border-color:#fff;">
                                         Số lượng
                                     </th>
-                                    <th width="20px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                    <th width="30px" style="border: 1px; border-style: solid; border-color:#fff;">
                                         Đơn giá
                                     </th>
-                                    <th width="40px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                    <th width="30px" style="border: 1px; border-style: solid; border-color:#fff;">
                                         Thành tiền
                                     </th>
-                                    <th width="90px" style="border: 1px; border-style: solid; border-color:#fff;">
+                                    <th width="50px" style="border: 1px; border-style: solid; border-color:#fff;">
                                         Ghi chú
                                     </th>
                                 </tr>
@@ -73,7 +73,7 @@
                                             <div t-field="line.quantity"/>
                                         </td>
                                         <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
-                                            <div t-field="line.price_unit"/>
+                                            <div t-field="line.price_unit" t-options='{"widget": "monetary", "display_currency": currency}'/>
                                         </td>
                                         <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
                                             <div t-field="line.price_subtotal"/>
@@ -83,6 +83,31 @@
                                         </td>
                                     </tr>
                                 </t>
+                                <t t-set="index" t-value="index + 1"/>
+                                <tr>
+                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <div t-esc="index"/>
+                                    </td>
+                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <div></div>
+                                    </td>
+                                    <td style="border 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <div/>
+                                    </td>
+                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <div/>
+                                    </td>
+                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                        <div>Tổng cộng: </div>
+                                    </td>
+                                    <td>
+                                        <strong  t-field="doc.amount_total_signed" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    </td>
+                                    <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <div/>
+                                    </td>
+
+                                </tr>
                             </tbody>
                         </table>
                     </div>

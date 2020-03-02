@@ -11,7 +11,7 @@ class BsdRegistryCard(models.Model):
     _description = "Mẫu đăng ký thẻ cư dân"
 
     name = fields.Char(string="Phiếu đăng ký", required=True, index=True, copy=False, default='New', tracking=1)
-    bsd_partner_id = fields.Many2one('res.partner', string="Chủ Hộ", states={'draft': [('readonly', False)],
+    bsd_residential_id = fields.Many2one('bsd.residential', string="Chủ Hộ", states={'draft': [('readonly', False)],
                                      'waiting': [('readonly', True)],
                                      'refuse': [('readonly', True)],
                                      'approve': [('readonly', True)]}, tracking=3)

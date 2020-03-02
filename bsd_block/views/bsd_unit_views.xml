@@ -30,7 +30,7 @@
                         </group>
                         <group>
                             <field name="bsd_owner_id"/>
-                            <field name="bsd_responsible_id"/>
+                            <!--<field name="bsd_responsible_id"/>-->
                             <field name="bsd_manager_id"/>
                             <field name="state"/>
                         </group>
@@ -56,6 +56,16 @@
                                 </group>
                             </group>
                         </page>
+                        <page string="Phí định kỳ">
+                            <field name="id" invisible="1"/>
+                            <field name="bsd_unit_fee_ids">
+                                <tree editable="bottom">
+                                    <field name="bsd_product_id"/>
+                                    <field name="bsd_month"/>
+                                    <field name="bsd_year"/>
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
@@ -75,7 +85,7 @@
                 <field name="bsd_type"/>
                 <field name="bsd_floor_id"/>
                 <field name="bsd_block_id"/>
-                <field name="bsd_responsible_id"/>
+                <!--<field name="bsd_responsible_id"/>-->
                 <field name="state"/>
             </tree>
         </field>
@@ -89,7 +99,7 @@
                 <field name="name"/>
                 <field name="complete_name"/>
                 <field name="bsd_categ_id"/>
-                <field name="bsd_responsible_id"/>
+                <!--<field name="bsd_responsible_id"/>-->
                 <field name="bsd_block_id"/>
                 <field name="color"/>
                 <templates>
@@ -115,7 +125,7 @@
                                     <field name="complete_name"/>
                                 </strong>
                                 <div>Tòa nhà: <field name="bsd_block_id"/></div>
-                                <div>Chủ Hộ: <field name="bsd_responsible_id"/></div>
+                                <!--<div>Chủ Hộ: <field name="bsd_responsible_id"/></div>-->
                             </div>
                         </div>
                     </t>

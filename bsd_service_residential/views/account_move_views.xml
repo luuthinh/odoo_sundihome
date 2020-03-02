@@ -21,4 +21,15 @@
             </xpath>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="bsd_account_move_select">
+        <field name="name">bsd.account.move.select</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="bsd_unit_id"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>

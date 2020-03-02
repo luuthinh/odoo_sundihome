@@ -3,11 +3,8 @@
     <record model="ir.ui.view" id="bsd_unit_form">
         <field name="name">bsd.unit.form.inherit</field>
         <field name="model">bsd.unit</field>
-        <field name="inherit_id" ref="bsd_block.bsd_unit_form"/>
+        <field name="inherit_id" ref="bsd_residential.bsd_unit_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='state']" position="after">
-                <field name="bsd_date_invoice"/>
-            </xpath>
             <xpath expr="//notebook" position="inside">
                 <page string="Giữ xe">
                     <field name="bsd_vehicle_ids" domain="[('state', 'in',['card','cancel'])]">
@@ -26,7 +23,11 @@
                 <page string="Chỉ số điện">
                     <field name="bsd_electric_ids" context="{'default_bsd_unit_id':id, 'default_bsd_partner_id':bsd_responsible_id}">
                         <tree>
+                            <field name="bsd_unit_id" invisible="1"/>
+                            <field name="bsd_partner_id" invisible="1"/>
+                            <field name="bsd_old_date"/>
                             <field name="bsd_old_index"/>
+                            <field name="bsd_new_date"/>
                             <field name="bsd_new_index"/>
                             <field name="bsd_total"/>
                             <field name="bsd_price"/>
@@ -40,7 +41,9 @@
                         <tree>
                             <field name="bsd_unit_id" invisible="1"/>
                             <field name="bsd_partner_id" invisible="1"/>
+                            <field name="bsd_old_date"/>
                             <field name="bsd_old_index"/>
+                            <field name="bsd_new_date"/>
                             <field name="bsd_new_index"/>
                             <field name="bsd_total"/>
                             <field name="bsd_price"/>

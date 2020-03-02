@@ -41,14 +41,14 @@
                                 <field name="bsd_pay_rec_id" readonly="1"/>
                                 <button type="object"
                                         name="action_payment_deposit"
-                                        icon="fa-pencil" class="oe_link" attrs="{'invisible': [('id', '=', False)]}"/>
+                                        string="Thu cọc" class="oe_link" attrs="{'invisible': [('id', '=', False)]}"/>
                             </div>
                             <label for="bsd_pay_ret_id" attrs="{'invisible':[('bsd_deposit', '=',False)]}"/>
                             <div class="d-flex"  attrs="{'invisible':[('bsd_deposit', '=',False)]}">
                                     <field name="bsd_pay_ret_id" readonly="1"/>
                                     <button type="object"
                                         name="action_payment_return"
-                                        icon="fa-pencil" class="oe_link" attrs="{'invisible': [('id', '=', False)]}"/>
+                                        string="Trả cọc" class="oe_link" attrs="{'invisible': [('id', '=', False)]}"/>
                             </div>
                             <field name="bsd_product_id"/>
                             <field name="bsd_residential_id"/>

@@ -18,7 +18,7 @@ class BsdRegistryRequest(models.Model):
                                           'waiting': [('readonly', True)],
                                           'refuse': [('readonly', True)],
                                           'approve': [('readonly', True)]}, tracking=2)
-    bsd_partner_id = fields.Many2one('res.partner', string="Chủ Hộ", states={'draft': [('readonly', False)],
+    bsd_residential_id = fields.Many2one('bsd.residential', string="Chủ Hộ", states={'draft': [('readonly', False)],
                                           'waiting': [('readonly', True)],
                                           'refuse': [('readonly', True)],
                                           'approve': [('readonly', True)]}, tracking=3)
@@ -46,9 +46,9 @@ class BsdRegistryRequest(models.Model):
                                            'approve': [('readonly', True)]}, tracking=7)
     active = fields.Boolean(default=True)
     state = fields.Selection([('draft', 'Nháp'),
-                              ('waiting', 'chờ duyệt'),
-                              ('refuse', 'từ chối'),
-                              ('approve', 'chấp nhận')], default='draft', tracking=8, copy=False, string="Trạng thái")
+                              ('waiting', 'Chờ duyệt'),
+                              ('refuse', 'Từ chối'),
+                              ('approve', 'Duyệt')], default='draft', tracking=8, copy=False, string="Trạng thái")
     bsd_send_user = fields.Many2one('res.users', 'Người lập phiếu', default=lambda self: self.env.uid, readonly=True, tracking=9)
     bsd_confirm_user = fields.Many2one('res.users', 'Người duyệt', readonly=True, tracking=10)
 
@@ -95,21 +95,21 @@ class BsdRegistryRequest(models.Model):
             choices += [('new_host', 'Đăng ký chủ hộ mới')]
         return choices
 
-    @api.onchange('bsd_method', 'bsd_partner_id', 'bsd_unit_id')
+    @api.onchange('bsd_method', 'bsd_residential_id', 'bsd_unit_id')
     def _onchange_unit(self):
         res = {}
         self.bsd_is_multi_unit = False
         if self.bsd_method == 'new_host':
-            self.bsd_partner_id = None
+            self.bsd_residential_id = None
             return {'domain': {'bsd_unit_id': [('bsd_responsible_id', '=', False)],
                                'bsd_multi_unit_ids': [('bsd_responsible_id', '=', False)]}}
         elif self.bsd_method == 'renew':
-            return {'domain': {'bsd_multi_unit_ids': [('bsd_responsible_id', '=', self.bsd_partner_id.id)],
-                               'bsd_unit_id': [('bsd_responsible_id', '=', self.bsd_partner_id.id)]}}
+            return {'domain': {'bsd_multi_unit_ids': [('bsd_responsible_id', '=', self.bsd_residential_id.id)],
+                               'bsd_unit_id': [('bsd_responsible_id', '=', self.bsd_residential_id.id)]}}
         else:
-            if self.bsd_partner_id:
+            if self.bsd_residential_id:
                 res.update({
-                    'domain': {'bsd_unit_id': [('bsd_responsible_id.id', '=', self.bsd_partner_id.id)]}
+                    'domain': {'bsd_unit_id': [('bsd_responsible_id.id', '=', self.bsd_residential_id.id)]}
                 })
             _logger.debug("get unit")
             _logger.debug(res)
@@ -155,7 +155,7 @@ class BsdRegistryRequest(models.Model):
             raise UserError("Đăng ký chủ hộ chỉ 1 người")
         residential_old = self.env['bsd.residential'].search([('bsd_cmnd', 'in', self._check_cmnd())])
         if residential_old:
-            self.bsd_unit_id.bsd_responsible_id = residential_old.partner_id.id
+            self.bsd_unit_id.bsd_responsible_id = residential_old.id
             if self.bsd_is_address:
                 residential_old.write({
                     'bsd_history_ids': [(0, 0, {'bsd_unit_id': self.bsd_multi_unit_ids[0].bsd_unit_id.id if self.bsd_is_multi_unit and self.bsd_multi_unit_ids else self.bsd_unit_id.id ,
@@ -175,9 +175,10 @@ class BsdRegistryRequest(models.Model):
                 'bsd_gender': self.bsd_line_ids[0].gender,
                 'vat': self.bsd_line_ids[0].vat,
                 'email': self.bsd_line_ids[0].email,
-                'mobile': self.bsd_line_ids[0].mobile
+                'mobile': self.bsd_line_ids[0].mobile,
+                'partner_id': self.bsd_line_ids[0].bsd_partner_id.id if self.bsd_line_ids[0].bsd_partner_id else False
             })
-            self.bsd_unit_id.bsd_responsible_id = residential_new.partner_id.id
+            self.bsd_unit_id.bsd_responsible_id = residential_new.id
 
             if self.bsd_is_address:
                 residential_new.write({
@@ -190,7 +191,6 @@ class BsdRegistryRequest(models.Model):
             self.bsd_line_ids[0].write({'bsd_residential_id': residential_new.id})
 
     def _action_create(self):
-
         residential_old = self.env['bsd.residential'].search([('bsd_cmnd', 'in', self._check_cmnd())])
         line_residential = self.bsd_line_ids.filtered(lambda x: x.cmnd in residential_old.mapped('bsd_cmnd'))
         for line in line_residential:
@@ -214,6 +214,7 @@ class BsdRegistryRequest(models.Model):
                 'vat': line.vat,
                 'email': line.email,
                 'mobile': line.mobile,
+                'partner_id': line.bsd_partner_id.id if line.bsd_partner_id else False,
                 'bsd_history_ids': [(0, 0, {'bsd_unit_id': self.bsd_unit_id.id,
                                             'bsd_date_move_on': fields.Date.today(),
                                             'bsd_relationship_id': line.relationship_id.id
@@ -236,10 +237,10 @@ class BsdRegistryRequest(models.Model):
         lines = self.bsd_line_ids.filtered(lambda l: l.bsd_create_card)
         if lines:
             if self.bsd_method == 'create':
-                partner = self.bsd_partner_id
+                residential = self.bsd_residential_id
                 unit = self.bsd_unit_id
             elif self.bsd_method == 'new_host':
-                partner = self.env['bsd.residential'].search([('bsd_cmnd', '=', lines.cmnd)]).partner_id
+                residential = self.env['bsd.residential'].search([('bsd_cmnd', '=', lines.cmnd)])
                 if self.bsd_is_multi_unit:
                     unit = self.bsd_multi_unit_ids[0]
                 else:
@@ -248,7 +249,7 @@ class BsdRegistryRequest(models.Model):
             for line in lines:
                 values.append((0, 0, {'bsd_residential_id': line.bsd_residential_id.id}))
             self.env['bsd.registry.card'].create({
-                'bsd_partner_id': partner.id,
+                'bsd_residential_id': residential.id,
                 'bsd_unit_id': unit.id,
                 'bsd_type_card': 'res',
                 'bsd_request': 'new',
@@ -276,6 +277,7 @@ class BsdRegistryRequestLine(models.Model):
     _name = 'bsd.registry.request.line'
 
     bsd_registry_request_id = fields.Many2one('bsd.registry.request', string='Phiếu đăng ký')
+    bsd_partner_id = fields.Many2one('res.partner', string="Khách hàng")
     name = fields.Char(string="Họ tên", required=True)
     birthday = fields.Date(string="Ngày sinh", required=True)
     gender = fields.Selection([('men', 'Nam'), ('women', 'Nữ')], string='Giới tính', default='men')
@@ -288,7 +290,13 @@ class BsdRegistryRequestLine(models.Model):
     relationship_id = fields.Many2one('bsd.residential.relationship', string="Quan hệ chủ hộ")
     bsd_method = fields.Selection([('create', 'Thêm thành viên'), ('new_host', 'Đăng ký chủ hộ')])
     bsd_create_card = fields.Boolean(string="Cấp thẻ")
-    bsd_residential_id = fields.Many2one('bsd.residential', string="cư dân")
+    bsd_residential_id = fields.Many2one('bsd.residential', string="Cư dân")
+
+    @api.onchange('bsd_partner_id')
+    def onchange_partner(self):
+        self.email = self.bsd_partner_id.email
+        self.mobile = self.bsd_partner_id.mobile
+        self.name = self.bsd_partner_id.name
 
 
 class BsdRegistryRequestResidential(models.Model):

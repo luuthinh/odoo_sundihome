@@ -1,11 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <record id="product_uom_m2_month" model="uom.uom">
-            <field name="category_id" ref="uom.uom_categ_wtime"/>
-            <field name="name">m2/tháng</field>
+        <record id="product_uom_categ_month" model="uom.category">
+            <field name="name">Kì</field>
+            <field name="measure_type">time</field>
+        </record>
+        <record id="product_uom_categ_m2month" model="uom.category">
+            <field name="name">m2*Tháng</field>
+            <field name="measure_type">m2month</field>
+        </record>
+        <record id="product_uom_categ_kw" model="uom.category">
+            <field name="name">Năng lương</field>
+            <field name="measure_type">kw</field>
+        </record>
+
+        <record id="product_uom_kw" model="uom.uom">
+            <field name="category_id" ref="product_uom_categ_kw"/>
+            <field name="name">Kw</field>
             <field name="factor" eval="1.0"/>
-            <field name="uom_type">smaller</field>
+            <field name="rounding" eval="0.001"/>
+        </record>
+
+        <record id="product_uom_m2_month" model="uom.uom">
+            <field name="category_id" ref="product_uom_categ_m2month"/>
+            <field name="name">m2.tháng</field>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.001"/>
+        </record>
+
+        <record id="product_uom_month" model="uom.uom">
+            <field name="category_id" ref="product_uom_categ_month"/>
+            <field name="name">Tháng</field>
+            <field name="factor" eval="1.0"/>
+            <field name="rounding" eval="0.001"/>
+        </record>
+
+        <record id="product_uom_q" model="uom.uom">
+            <field name="category_id" ref="product_uom_categ_month"/>
+            <field name="name">Quý</field>
+            <field name="factor_inv" eval="3"/>
+            <field name="uom_type">bigger</field>
+        </record>
+        <record id="product_uom_year" model="uom.uom">
+            <field name="category_id" ref="product_uom_categ_month"/>
+            <field name="name">Năm</field>
+            <field name="factor_inv" eval="12"/>
+            <field name="uom_type">bigger</field>
+        </record>
+
+        <record id="product_uom_m3" model="uom.uom">
+            <field name="category_id" ref="uom.product_uom_categ_vol"/>
+            <field name="name">m3</field>
+            <field name="factor_inv" eval="1000"/>
+            <field name="uom_type">bigger</field>
+        </record>
+
+        <record id="product_uom_vehicle" model="uom.uom">
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+            <field name="name">Xe</field>
+            <field name="factor_inv" eval="1"/>
+            <field name="uom_type">bigger</field>
+        </record>
+    </data>
+    <data noupdate="0">
+        <record id="product_uom_gym" model="uom.uom">
+            <field name="category_id" ref="uom.product_uom_categ_unit"/>
+            <field name="name">Gói</field>
+            <field name="factor_inv" eval="1"/>
+            <field name="uom_type">bigger</field>
         </record>
     </data>
 </odoo>

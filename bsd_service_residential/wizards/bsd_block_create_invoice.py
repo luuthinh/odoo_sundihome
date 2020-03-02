@@ -18,12 +18,12 @@ class BsdBlockCreateInvoice(models.TransientModel):
     bsd_year = fields.Selection([(str(num), str(num)) for num in range(2020, 2100)],
                                 string='Năm',
                                 default='2020', required=True)
-    bsd_month = fields.Selection([(str(num), str(num)) for num in range(1, 12)],
+    bsd_month = fields.Selection([(str(num), str(num)) for num in range(1, 13)],
                                  string='Tháng',
                                  default='1', required=True)
     bsd_date_invoice = fields.Date(string="Ngày in hóa đơn", default=fields.Date.today(), required=True)
     bsd_due_date = fields.Date(string="Hạn thanh toán", default=fields.Date.today())
-    bsd_invoice_origin = fields.Text(string="Memo")
+    bsd_invoice_origin = fields.Text(string="Nội dung")
 
     @profile
     def create_invoice(self):
@@ -96,13 +96,4 @@ class BsdBlockCreateInvoice(models.TransientModel):
         id_unit_invoice_date = [item for item in item_ids if item[1]]
         id_unit_no_invoice_last_month = [item[0] for item in id_unit_invoice_date if item[1] <= first_day_of_month_prev]
         id_unit_invoice_last_month = [item[0] for item in id_unit_invoice_date if first_day_of_month_prev <= item[1] <= last_day_of_month_prev]
-        _logger.debug("id no date invoice")
-        _logger.debug(id_unit_no_invoice_date)
-        _logger.debug("id no invoice last month")
-        _logger.debug(id_unit_no_invoice_last_month)
-        _logger.debug("id invoice last month")
-        _logger.debug(id_unit_invoice_last_month)
-        # if id_unit_no_invoice_last_month:
-        #     unit_no_invoice_last_month = self.env['bsd.unit'].browse(id_unit_no_invoice_last_month).mapped('complete_name')
-        #     raise Warning(_("Các unit không có hóa đơn tháng trước: %s" % unit_no_invoice_last_month))
         return self.env['bsd.unit'].browse(id_unit_invoice_last_month + id_unit_no_invoice_date)

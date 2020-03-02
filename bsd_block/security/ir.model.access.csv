@@ -29,3 +29,4 @@ bsd_unit,Model portal bsd_unit,model_bsd_unit,base.group_portal,1,0,0,0
 
 bsd_block_fee_manager,Model manager bsd_block_fee,model_bsd_block_fee,bsd_block.group_manager,1,1,1,1
 
+bsd_unit_fee_manager,Model manager bsd_unit_fee,model_bsd_unit_fee,bsd_block.group_manager,1,1,1,1

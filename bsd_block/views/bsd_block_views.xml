@@ -52,6 +52,12 @@
                                     <field name="bsd_product_ids" widget="many2many_tags"/>
                                 </tree>
                             </field>
+                            <footer>
+                                <button string="Cập nhật phí unit"
+                                        type="object"
+                                        name="action_update_fee"
+                                        class="oe_highlight oe_right"/>
+                            </footer>
                         </page>
                         <page string="Tầng">
                             <field name="bsd_floor_ids">

@@ -15,7 +15,7 @@ class BsdResidentialVehicle(models.Model):
     name = fields.Char(string="Phiếu", required=True, index=True, copy=False, default='New')
     bsd_brand = fields.Char(string="Hiệu Xe", required=True)
     bsd_license = fields.Char(string="Biển kiểm soát", required=True)
-    bsd_partner_id = fields.Many2one('res.partner', string="Chủ Hộ")
+    bsd_partner_id = fields.Many2one('bsd.residential', string="Chủ Hộ")
     bsd_unit_id = fields.Many2one('bsd.unit', string="Căn Hộ")
     bsd_note = fields.Char(string="Ghi chú")
     state = fields.Selection([('draft', 'Nháp'),

@@ -15,9 +15,15 @@
               parent="bsd_res_menu"
               action="bsd_residential_res_action"/>
 
+    <menuitem id="bsd_residential_history_menu_action"
+              name="Lưu trú"
+              sequence="16"
+              parent="bsd_res_menu"
+              action="bsd_residential_history_action"/>
+
     <menuitem id="bsd_residential_card_menu_action"
               name="Thẻ"
-              sequence="16"
+              sequence="17"
               parent="bsd_res_menu"
               action="bsd_residential_card_action"/>
 

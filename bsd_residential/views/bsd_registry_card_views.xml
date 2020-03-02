@@ -40,11 +40,11 @@
                     <group>
                         <group>
                             <field name="id" invisible="1"/>
-                            <field name="bsd_partner_id"
+                            <field name="bsd_residential_id"
                                    domain="[('bsd_is_master','=',True)]"
                                    options="{'no_create': True}"/>
                             <field name="bsd_unit_id" options="{'no_create': True}"
-                                   domain="[('bsd_responsible_id','in',[bsd_partner_id]),('bsd_responsible_id','!=',False)]"/>
+                                   domain="[('bsd_responsible_id','in',[bsd_residential_id]),('bsd_responsible_id','!=',False)]"/>
                         </group>
                     </group>
                     <group>
@@ -107,7 +107,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="bsd_partner_id"/>
+                <field name="bsd_residential_id"/>
                 <field name="bsd_unit_id"/>
                 <field name="bsd_send_date"/>
                 <field name="bsd_send_user"/>
